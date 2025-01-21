@@ -13,7 +13,13 @@ import productpage2 from "../assets/productpage2.jpeg";
 import productpage3 from "../assets/productpage3.jpeg";
 
 //Icons
-import { Facebook, Twitter, Instagram } from "lucide-react";
+import {
+  FacebookIcon,
+  FactoryIcon,
+  InstagramIcon,
+  LinkedinIcon,
+  TwitterIcon
+} from "lucide-react";
 
 export const products = [
   {
@@ -140,14 +146,16 @@ export const footerSections = {
   ],
   PAYMENT: [
     { name: "Mastercard", href: "#" },
+    { name: "Gift Coupons", href: "#" },
     { name: "Visa", href: "#" },
     { name: "Verve", href: "#" }
   ]
 };
 
 export const socialLinks = [
-  { icon: "Facebook", href: "#" }, // Facebook
-  { icon: "Twitter", href: "#" }, // Twitter
-  { icon: "Instagram", href: "#" } // Instagram
-  // { icon: "LinkedIn", href: "#" } // LinkedIn
+  <FactoryIcon />,
+  { icon: <FacebookIcon />, href: "#" }, // Facebook
+  { icon: <TwitterIcon />, href: "#" }, // Twitter
+  { icon: <InstagramIcon />, href: "#" }, // Instagram
+  { icon: <LinkedinIcon />, href: "#" } // LinkedIn
 ];
