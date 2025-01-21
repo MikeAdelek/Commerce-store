@@ -1,6 +1,6 @@
 import ps5 from "../assets/ps5.jpeg";
 import dell from "../assets/dell.jpeg";
-import hp from "../assets/hp.jpeg";
+import hp from "../assets/Hp.jpeg";
 import fan from "../assets/fan.jpeg";
 import headset1 from "../assets/headset1.jpeg";
 import headset from "../assets/headset.jpeg";
@@ -8,12 +8,12 @@ import iphone from "../assets/iphone16.jpeg";
 import cooker from "../assets/cooker.jpeg";
 import iron from "../assets/iron.jpeg";
 
-import productpage1 from '../assets/productpage1.jpeg'
-import productpage2 from '../assets/productpage2.jpeg'
-import productpage3 from '../assets/productpage3.jpeg'
+import productpage1 from "../assets/productpage1.jpeg";
+import productpage2 from "../assets/productpage2.jpeg";
+import productpage3 from "../assets/productpage3.jpeg";
 
 //Icons
-import {Facebook, Twitter, Instagram, LinkedIn} from 'lucide-react'
+import { Facebook, Twitter, Instagram, LinkedIn } from "lucide-react";
 
 export const products = [
   {
@@ -100,56 +100,54 @@ export const filters = {
   size: ["Small", "Medium", "Large"]
 };
 
-export const productPageImage = [
-  productpage1, productpage2, productpage3
-]
+export const productPageImage = [productpage1, productpage2, productpage3];
 
 export const reviews = [
   {
-    name: 'Solomon Carl', 
+    name: "Solomon Carl",
     rating: 4
   },
   {
-    name: 'Chineme Nnebe', 
+    name: "Chineme Nnebe",
     rating: 5
   },
   {
-    name: 'Samson Fayemi', 
+    name: "Samson Fayemi",
     rating: 3
   }
-]
+];
 
 export const footerSections = {
   COMMERCE: [
-    {name: 'Products', href: '#'},
-    {name: 'Sell on Commerce', href: '#'},
-    {name: 'Become an Affiliate', href: '#'},
+    { name: "Products", href: "#" },
+    { name: "Sell on Commerce", href: "#" },
+    { name: "Become an Affiliate", href: "#" }
   ],
   ABOUT: [
-    {name: 'Contact us', href: '#'},
-    {name: 'About us', href: '#'},
-    {name: 'Careers', href: '#'},
-    {name: 'Our Blog', href: '#'},
-    {name: 'Terms & Conditions', href: '#'},
+    { name: "Contact us", href: "#" },
+    { name: "About us", href: "#" },
+    { name: "Careers", href: "#" },
+    { name: "Our Blog", href: "#" },
+    { name: "Terms & Conditions", href: "#" }
   ],
   RESOURCES: [
-    {name: 'News updates', href: '#'},
-    {name: 'Return Policy', href: '#'},
-    {name: 'Delivery', href: '#'},
-    {name: 'Customer Support', href: '#'},
-    {name: 'Brands guidelines', href: '#'},
-    {name: 'Privacy Policy', href: '#'},
+    { name: "News updates", href: "#" },
+    { name: "Return Policy", href: "#" },
+    { name: "Delivery", href: "#" },
+    { name: "Customer Support", href: "#" },
+    { name: "Brands guidelines", href: "#" },
+    { name: "Privacy Policy", href: "#" }
   ],
   PAYMENT: [
-    {name: 'Mastercard', href: '#'},
-    {name: 'Visa', href: '#'},
-    {name: 'Verve', href: '#'},
-  ],
-}
+    { name: "Mastercard", href: "#" },
+    { name: "Visa", href: "#" },
+    { name: "Verve", href: "#" }
+  ]
+};
 
 export const socialLinks = [
-  {icon: 'Facebook', href: '#'}, // Facebook
-  {icon: 'Twitter', href: '#'}, // Twitter
-  {icon: 'Instagram', href: '#'}, // Instagram
-  {icon: 'LinkedIn', href: '#'}, // LinkedIn
-]
+  { icon: "Facebook", href: "#" }, // Facebook
+  { icon: "Twitter", href: "#" }, // Twitter
+  { icon: "Instagram", href: "#" }, // Instagram
+  { icon: "LinkedIn", href: "#" } // LinkedIn
+];
