@@ -13,7 +13,7 @@ import productpage2 from "../assets/productpage2.jpeg";
 import productpage3 from "../assets/productpage3.jpeg";
 
 //Icons
-import { Facebook, Twitter, Instagram, LinkedIn } from "lucide-react";
+import { Facebook, Twitter, Instagram } from "lucide-react";
 
 export const products = [
   {
@@ -148,6 +148,6 @@ export const footerSections = {
 export const socialLinks = [
   { icon: "Facebook", href: "#" }, // Facebook
   { icon: "Twitter", href: "#" }, // Twitter
-  { icon: "Instagram", href: "#" }, // Instagram
-  { icon: "LinkedIn", href: "#" } // LinkedIn
+  { icon: "Instagram", href: "#" } // Instagram
+  // { icon: "LinkedIn", href: "#" } // LinkedIn
 ];
