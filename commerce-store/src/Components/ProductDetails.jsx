@@ -28,6 +28,7 @@ export const products = [
     price: "234, 464",
     discount: "29%",
     img: ps5,
+    color: "color: BK BL RB",
     category: "electronics"
   },
   {
@@ -35,6 +36,7 @@ export const products = [
     name: "Dell office desktop",
     price: "193, 572",
     img: dell,
+    color: "color: BK BL RB",
     category: "electronics"
   },
   {
@@ -43,6 +45,7 @@ export const products = [
     price: "94, 631",
     favorite: true,
     img: hp,
+    color: "color: BK BL RB",
     category: "electronics"
   },
   {
@@ -51,6 +54,7 @@ export const products = [
     price: "34, 000",
     favorite: true,
     img: fan,
+    color: "color: BK BL RB",
     category: "electronics"
   },
   {
@@ -58,6 +62,7 @@ export const products = [
     name: "Redmill wireless headset",
     price: "29, 213",
     img: headset1,
+    color: "color: BK BL RB",
     category: "electronics"
   },
   {
@@ -65,6 +70,7 @@ export const products = [
     name: "JBL wireless headset",
     price: "49, 000",
     img: headset,
+    color: "color: BK BL RB",
     category: "electronics"
   },
   {
@@ -72,6 +78,7 @@ export const products = [
     name: "iphone16, 346 gb Ram",
     price: "894, 000",
     img: iphone,
+    color: "color: BK BL RB",
     category: "electronics"
   },
   {
@@ -79,6 +86,7 @@ export const products = [
     name: "Quillox, inbuilt cooker",
     price: "129, 513",
     img: cooker,
+    color: "color: BK BL RB",
     category: "electronics"
   },
   {
@@ -87,6 +95,7 @@ export const products = [
     price: "67, 000",
     discount: "9%",
     img: iron,
+    color: "color: BK BL RB",
     category: "electronics"
   }
 ];

@@ -1,36 +1,40 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
+import playStore from "../assets/Android.png";
+import appleStore from "../assets/Vector.png";
 import { footerSections, socialLinks } from "./ProductDetails";
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-r from-[#4AA58B] to-[#1C3F35]  text-white py-8 px-4">
-      <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-5 gap-8">
+    <footer className="bg-gradient-to-r from-[#4AA58B] to-[#1C3F35]  text-white py-6 px-4">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
         {/* Commerce Section */}
-        <div>
-          <h3 className="font-bold mb-8">COMMERCE</h3>
-          <div className="space-y-8 flex flex-col">
+        <div className="mb-4 sm:mb-0">
+          <h3 className="font-bold mb-4 text-sm sm:text-base">COMMERCE</h3>
+          <div className="space-y-3 flex flex-col">
             {footerSections.COMMERCE.map((item) => (
               <NavLink
                 to={item.href}
                 key={item.name}
-                className="hover:text-gray-200"
+                className="hover:text-gray-200 text-xs sm:text-sm"
               >
                 {item.name}
               </NavLink>
             ))}
           </div>
 
-          <div className="mt-8">
-            <h4 className="font-bold mb-4">CONNECT WITH US</h4>
-            <div className="flex space-x-2">
+          <div className="mt-4 sm:mt-6">
+            <h4 className="font-bold mb-2 text-sm sm:text-base">
+              CONNECT WITH US
+            </h4>
+            <div className="flex space-x-3">
               {socialLinks.map((social, index) => (
                 <a
                   key={index}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-white hover:text-gray-200"
+                  className="text-white hover:text-gray-200 text-lg sm:text-xl"
                   aria-label={`Social link ${index + 1}`}
                 >
                   {social.icon}
@@ -41,14 +45,14 @@ const Footer = () => {
         </div>
 
         {/* About Section */}
-        <div>
-          <h3 className="font-bold mb-8">ABOUT</h3>
-          <Link className="space-y-8 flex flex-col">
+        <div className="mb-4 sm:mb-0">
+          <h3 className="font-bold mb-4 text-sm sm:text-base">ABOUT</h3>
+          <Link className="space-y-3 flex flex-col">
             {footerSections.ABOUT.map((item) => (
               <NavLink
                 to={item.href}
                 key={item.name}
-                className="hover:text-gray-200"
+                className="hover:text-gray-200 text-xs sm:text-sm"
               >
                 {item.name}
               </NavLink>
@@ -57,14 +61,14 @@ const Footer = () => {
         </div>
 
         {/* Resources Section */}
-        <div>
-          <h3 className="font-bold mb-8">RESOURCES</h3>
-          <Link className="space-y-8 flex flex-col">
+        <div className="mb-4 sm:mb-0">
+          <h3 className="font-bold mb-4 text-sm sm:text-base">RESOURCES</h3>
+          <Link className="space-y-3 flex flex-col">
             {footerSections.RESOURCES.map((item) => (
               <NavLink
                 to={item.href}
                 key={item.name}
-                className="hover:text-gray-200"
+                className="hover:text-gray-200 text-xs sm:text-sm"
               >
                 {item.name}
               </NavLink>
@@ -73,14 +77,14 @@ const Footer = () => {
         </div>
 
         {/* Payment Section */}
-        <div>
-          <h3 className="font-bold mb-8">PAYMENT</h3>
-          <Link className="space-y-8 flex flex-col">
+        <div className="mb-4 sm:mb-0">
+          <h3 className="font-bold mb-4 text-sm sm:text-base">PAYMENT</h3>
+          <Link className="space-y-3 flex flex-col">
             {footerSections.PAYMENT.map((item) => (
               <NavLink
                 to={item.href}
                 key={item.name}
-                className="hover:text-gray-200"
+                className="hover:text-gray-200 text-xs sm:text-sm"
               >
                 {item.name}
               </NavLink>
@@ -89,35 +93,40 @@ const Footer = () => {
         </div>
 
         {/* Newsletter Section */}
-        <div>
-          <h3 className="font-bold mb-4">OUR APPS</h3>
+        <div className="col-span-1 sm:col-span-2 md:col-span-1 lg:col-span-1">
+          <h3 className="font-bold mb-4 text-sm sm:text-base">OUR APPS</h3>
           <div className="space-y-2">
             <a
               href="#"
-              className="block bg-black text-white px-4 py-2 rounded-md hover:bg-gray-800"
+              className="bg-black text-white px-3 py-2 rounded-md hover:bg-gray-800 flex items-center space-x-2"
             >
               <img
-                src="/api/placeholder/120/40"
+                src={playStore}
                 alt="Get it on Play Store"
-                className="w-30"
+                className="w-6 h-6"
               />
+              <span className="text-xs sm:text-sm">Google Play Store</span>
             </a>
             <a
               href="#"
-              className="block bg-black text-white px-4 py-2 rounded-md hover:bg-gray-800"
+              className="bg-black text-white px-4 py-2 rounded-md hover:bg-gray-800 flex items-center space-x-2"
             >
               <img
-                src="/api/placeholder/120/40"
+                src={appleStore}
                 alt="Download on App Store"
-                className="w-30"
+                className="w-6 h-6"
               />
+              <span className="text-xs sm:text-sm">Apple Store</span>
             </a>
           </div>
         </div>
       </div>
 
-      <div className="mt-8 text-center text-sm">
-        <p>© {new Date().getFullYear()} All rights reserved.</p>
+      <div className="w-full bg-gray-600 h-[1px] mt-6 sm:mt-8"></div>
+      <div className="mt-4 sm:mt-6 text-center text-xs sm:text-sm">
+        <p className="text-black">
+          © {new Date().getFullYear()} All rights reserved.
+        </p>
       </div>
     </footer>
   );
