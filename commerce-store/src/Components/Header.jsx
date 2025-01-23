@@ -60,7 +60,7 @@ const Header = ({ product }) => {
           {/* Icons */}
           <div className="hidden md:flex items-center space-x-4">
             <Link to={`/cartpage/${product}`} className="cursor-pointer">
-              <ShoppingCart className="text-emerald-700" />
+              <ShoppingCart className="text-emerald-700" size={24} />
             </Link>
             <Link to={`/wishlist/${product}`} className="cursor-pointer">
               <Heart className="text-emerald-700" size={24} />
@@ -95,14 +95,14 @@ const Header = ({ product }) => {
                 className="cursor-pointer flex items-center space-x-2"
               >
                 <ShoppingCart className="text-emerald-700" size={24} />
-                <span>Cart</span>
+                <span className="text-black">Cart</span>
               </Link>
               <Link
                 to={`/wishlist/${product}`}
                 className="cursor-pointer flex items-center space-x-2"
               >
-                <ShoppingCart className="text-emerald-700" size={24} />
-                <span>Wishlist</span>
+                <Heart className="text-emerald-700" size={24} />
+                <span className="text-black">Wishlist</span>
               </Link>
             </div>
           </div>

@@ -6,6 +6,13 @@ import { categories, filters, products } from "./ProductDetails";
 const Category = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [selectedFilters, setSelectedFilters] = useState({});
+  const [selectedCategory, setSelectedCategory] = useState("");
+
+  // filter the product based on the selected category
+  // const categoryProduct =
+  //   selectedCategory === ""
+  //     ? products
+  //     : products.filter((product) => product.category === selectedCategory);
 
   const toggleFilter = () => {
     setIsFilterOpen(!isFilterOpen);
@@ -26,16 +33,25 @@ const Category = () => {
     setSelectedFilters({});
   };
 
+  const filteredProducts = products.filter((product) => {
+    // implement your filtering logic here
+    return Object.entries(selectedFilters).every(
+      ([category, selectedItems]) =>
+        selectedItems.length === 0 ||
+        selectedItems.includes(product[category.toLowerCase()])
+    );
+  });
+
   return (
     <div className="min-h-screen bg-white">
       <div className="max-w-7xl mx-auto px-4">
         {/* categories - scrollable on mobile */}
-        <div className="flex gap-4 my-4 sm:my-6 overflow-x-auto">
+        <div className="flex gap-4 my-4 sm:my-6 overflow-x-auto whitespace-nowrap">
           {categories.map((item) => (
             <NavLink
               to="/"
               key={item}
-              className="flex-shrink-0 text-sm sm:text-base text-emerald-700 hover:underline"
+              className="inline-block flex-shrink-0 text-sm sm:text-base text-emerald-700 hover:underline"
             >
               {item}
             </NavLink>
@@ -43,7 +59,7 @@ const Category = () => {
         </div>
 
         {/* Main content */}
-        <div className="flex flex-col md:flex-row gap-4 md:gap-8 p-8">
+        <div className="flex flex-col md:flex-row gap-4 md:gap-8 p-4 sm:p-8">
           {/* Mobile  filter  toggle*/}
           <div className="md:hidden flex justify-end mb-4">
             <button
@@ -85,17 +101,6 @@ const Category = () => {
 
               {/* Active Filters */}
               <div className="flex flex-wrap gap-2 mb-4 cursor-pointer">
-                <div className="flex flex-wrap gap-2 mb-4 cursor-pointer">
-                  <span className="bg-emerald-900 text-white px-3 py-1 rounded-full text-sm">
-                    Office
-                  </span>
-                  <span className="bg-emerald-900 text-white px-3 py-1 rounded-full text-sm">
-                    Home
-                  </span>
-                  <span className="bg-emerald-900 text-white px-3 py-1 rounded-full text-sm">
-                    Gaming
-                  </span>
-                </div>
                 {Object.entries(selectedFilters).flatMap(([cat, items]) =>
                   items.map((item) => (
                     <span
@@ -150,12 +155,12 @@ const Category = () => {
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6">
-              {products.map((product) => (
-                <div
+              {filteredProducts.map((product) => (
+                <Link
                   key={product.id}
-                  className="bg-gray-50 rounded-lg p-4 sm:p-8"
+                  className="bg-white rounded-lg p-4 sm:p-6 flex flex-col shadow-md hover:shadow-lg transition-shadow duration-300"
                 >
-                  <div className="relative mb-2 sm:mb-4">
+                  <div className="relative mb-2 sm:mb-4 flex-shrink-0">
                     <img
                       src={product.img}
                       alt={product.name}
@@ -167,31 +172,37 @@ const Category = () => {
                         {product.discount}
                       </span>
                     )}
-                    {product.favorite && (
-                      <Heart
-                        className="absolute top-2 right-2 text-red-500 fill-red-500"
-                        size={20}
-                      />
-                    )}
+                    <Heart
+                      className={`absolute top-2 right-2 ${
+                        product.favorite
+                          ? "text-red-500 fill-red-500"
+                          : "text-gray-300"
+                      } `}
+                      size={20}
+                    />
                   </div>
-                  <h3 className="font-medium text-sm sm:text-base mb-1 sm:mb-2 truncate">
-                    {product.name}
-                  </h3>
-                  <span className="flex items-center gap-2">
-                    {product.color}
-                  </span>
-                  <div className="flex justify-between items-center text-sm sm:text-base text-gray-400">
-                    <span className="text-orange-500 text-sm sm:text-base">
-                      ₦ {product.price}
-                    </span>
-                    <Link
-                      to={`/productpage/${product.id}`}
-                      className="text-emerald-700 border border-emerald-700 px-2 py-1 rounded text-xs sm:text-sm"
-                    >
-                      Add to Cart
-                    </Link>
+                  <div className="flex-grow flex flex-col justify-between">
+                    <div>
+                      <h3 className="font-medium text-sm sm:text-base mb-1 sm:mb-2 truncate">
+                        {product.name}
+                      </h3>
+                      <span className="block text-sm sm:text-base text-gray-400 mb-2">
+                        {product.color}
+                      </span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-orange-500 text-sm sm:text-base font-semibold">
+                        ₦ {product.price}
+                      </span>
+                      <Link
+                        to={`/productpage/${product.id}`}
+                        className="text-emerald-700 border border-emerald-700 px-2 py-1 rounded text-xs sm:text-sm"
+                      >
+                        Add to Cart
+                      </Link>
+                    </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </div>
