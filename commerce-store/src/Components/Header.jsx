@@ -24,7 +24,7 @@ const Header = ({ product }) => {
           </div>
 
           {/* Mobile Menu Toggle */}
-          <div className="md:hidden">
+          <div className="md:hidden items-center">
             <button
               onClick={toggleMenu}
               className="text-emerald-700"
