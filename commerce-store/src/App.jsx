@@ -1,5 +1,6 @@
 import Category from "./Components/Category";
 import ProductPage from "./Components/ProductPage";
+import HomePage from "./Components/HomePage";
 // import OrderSummary from "./Components/OrderSummary";
 import CartPage from "./Components/CartPage";
 import Checkout from "./Components/Checkout";
@@ -17,8 +18,8 @@ function App() {
           path="/"
           element={
             <>
-              {/* <Home /> */}
-              <Category />
+              <HomePage />
+              {/* <Category /> */}
             </>
           }
         />
@@ -27,7 +28,7 @@ function App() {
         <Route path="/productpage/:productId" element={<ProductPage />} />
         <Route path="/cartpage/:productId" element={<CartPage />} />
         <Route path="/checkout/:productId" element={<Checkout />} />
-        {/* <Route path="/ordersummary/:product" element={<OrderSummary />} /> */}
+        <Route path="/category/:productId" element={<Category />} />
 
         {/* Add a catch-all route for 404 errors */}
         <Route

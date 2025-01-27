@@ -1,6 +1,14 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Search, ShoppingCart, Heart, MicIcon, Menu, X } from "lucide-react";
+import {
+  Search,
+  ShoppingCart,
+  Heart,
+  MicIcon,
+  Menu,
+  X,
+  Bell
+} from "lucide-react";
 
 const Header = ({ product }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -24,7 +32,7 @@ const Header = ({ product }) => {
           </div>
 
           {/* Mobile Menu Toggle */}
-          <div className="md:hidden items-center">
+          <div className="md:hidden">
             <button
               onClick={toggleMenu}
               className="text-emerald-700"
@@ -33,7 +41,7 @@ const Header = ({ product }) => {
               {isMenuOpen ? (
                 <X size={24} />
               ) : (
-                <Menu size={24} className="text-black" />
+                <Menu size={24} className="text-black items-center" />
               )}
             </button>
           </div>
@@ -64,6 +72,9 @@ const Header = ({ product }) => {
             </Link>
             <Link to={`/wishlist/${product}`} className="cursor-pointer">
               <Heart className="text-emerald-700" size={24} />
+            </Link>
+            <Link to={`/wishlist/${product}`} className="cursor-pointer">
+              <Bell className="text-emerald-700" size={24} />
             </Link>
           </div>
         </div>
@@ -103,6 +114,9 @@ const Header = ({ product }) => {
               >
                 <Heart className="text-emerald-700" size={24} />
                 <span className="text-black">Wishlist</span>
+              </Link>
+              <Link to={`/wishlist/${product}`} className="cursor-pointer">
+                <Bell className="text-emerald-700" size={24} />
               </Link>
             </div>
           </div>

@@ -6,13 +6,6 @@ import { categories, filters, products } from "./ProductDetails";
 const Category = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [selectedFilters, setSelectedFilters] = useState({});
-  const [selectedCategory, setSelectedCategory] = useState("");
-
-  // filter the product based on the selected category
-  // const categoryProduct =
-  //   selectedCategory === ""
-  //     ? products
-  //     : products.filter((product) => product.category === selectedCategory);
 
   const toggleFilter = () => {
     setIsFilterOpen(!isFilterOpen);

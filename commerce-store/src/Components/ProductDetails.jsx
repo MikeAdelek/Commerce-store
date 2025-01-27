@@ -12,6 +12,19 @@ import productpage1 from "../assets/productpage1.jpeg";
 import productpage2 from "../assets/productpage2.jpeg";
 import productpage3 from "../assets/productpage3.jpeg";
 
+import Slide1 from "../assets/commerce-homepage.jpeg";
+import Slide2 from "../assets/commerce-homepage2.jpeg";
+
+import NewArrival1 from "../assets/headset1.jpeg";
+import NewArrival2 from "../assets/newArrival/flowerjacket.png";
+import NewArrival3 from "../assets/newArrival/unisexBlazer.png";
+import NewArrival4 from "../assets/newArrival/handBags.png";
+import NewArrival5 from "../assets/newArrival/hoodie.png";
+import NewArrival6 from "../assets/wishlist.jpeg";
+
+import trending1 from "../assets/newArrival/xmasTree.png";
+import trending2 from "../assets/newArrival/winterBoot.png";
+
 //Icons
 import {
   FacebookIcon,
@@ -20,6 +33,116 @@ import {
   LinkedinIcon,
   TwitterIcon
 } from "lucide-react";
+
+// Images
+import ImageCarousel from "./ImageCarousel";
+
+export const homeCategory = [
+  "NEW",
+  "TRENDS",
+  "FASHION",
+  "KIDS",
+  "GADGETS",
+  "KITCHEN",
+  "HEALTH"
+];
+
+export const slides = [
+  {
+    id: 1,
+    image: Slide1
+  },
+  {
+    id: 2,
+    image: Slide2
+  }
+];
+
+export default function ProductDetails() {
+  return (
+    <div className="w-full">
+      <ImageCarousel autoSlide={true} autoSlideInterval={5000}>
+        {slides.map((s) => (
+          <img src={s} />
+        ))}
+      </ImageCarousel>
+    </div>
+  );
+}
+
+export const newArrivals = [
+  {
+    id: 1,
+    name: "Redmil Wireless Headset",
+    price: "29,213",
+    img: NewArrival1,
+    color: "color: BK BL RB",
+    category: "electronics"
+  },
+  {
+    id: 2,
+    name: "Flower patterned winter jacket",
+    price: "5673",
+    img: NewArrival2,
+    size: "Size: S L M XL XXL",
+    category: "electronics"
+  },
+  {
+    id: 3,
+    name: "Ron Lach unisex blazer",
+    price: "3563",
+    favorite: true,
+    img: NewArrival3,
+    size: "Size: S L M",
+    category: "electronics"
+  },
+  {
+    id: 4,
+    name: "Victorian Luxury ladies bag",
+    price: "45, 243",
+    favorite: true,
+    img: NewArrival4,
+    color: "color: BK BL RB",
+    category: "electronics"
+  },
+  {
+    id: 5,
+    name: "Adidas plain colored hoodie",
+    price: "5213",
+    img: NewArrival5,
+    size: "Size: S L M XL XXL",
+    category: "electronics"
+  },
+  {
+    id: 6,
+    name: "Vitamin C",
+    price: "1789",
+    img: NewArrival6,
+    color: "color: BK BL RB",
+    category: "electronics"
+  }
+];
+
+export const trending = [
+  {
+    id: 1,
+    name: "Ornated 6ft Xmas Tree",
+    description: "Almost sold out",
+    price: "13,568",
+    img: trending1,
+    size: "Size: 3ft 5ft 6ft 8ft",
+    category: "electronics"
+  },
+  {
+    id: 2,
+    name: "Zeus King winter boots",
+    description: "Almost sold out",
+    price: "42,675",
+    img: trending2,
+    size: "Size: 40 43 45 48",
+    category: "electronics"
+  }
+];
 
 export const products = [
   {
