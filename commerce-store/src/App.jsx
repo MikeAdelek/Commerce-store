@@ -18,7 +18,7 @@ function App() {
           path="/"
           element={
             <>
-              <HomePage />
+              <HomePage path="/" />
               {/* <Category /> */}
             </>
           }
@@ -28,7 +28,7 @@ function App() {
         <Route path="/productpage/:productId" element={<ProductPage />} />
         <Route path="/cartpage/:productId" element={<CartPage />} />
         <Route path="/checkout/:productId" element={<Checkout />} />
-        <Route path="/category/:productId" element={<Category />} />
+        <Route path="category" element={<Category />} />
 
         {/* Add a catch-all route for 404 errors */}
         <Route

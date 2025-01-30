@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { slides } from "./ProductDetails";
 
 const ImageCarousel = ({ autoSlide = true, autoSlideInterval = 5000 }) => {
@@ -63,9 +64,12 @@ const ImageCarousel = ({ autoSlide = true, autoSlideInterval = 5000 }) => {
                   <p className="text-base md:text-lg text-white mb-4 md:mb-6">
                     Enjoy 50% discount on every purchase of more than ₦20,000
                   </p>
-                  <button className="bg-[#FE6900] text-white px-6 md:px-8 py-2 md:py-3 rounded-full w-max text-base md:text-lg">
+                  <Link
+                    to="/category"
+                    className="bg-[#FE6900] text-white px-6 md:px-8 py-2 md:py-3 rounded-full w-max text-base md:text-lg"
+                  >
                     Shop Now
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>

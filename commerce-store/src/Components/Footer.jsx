@@ -6,7 +6,7 @@ import { footerSections, socialLinks } from "./ProductDetails";
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-r from-[#4AA58B] to-[#1C3F35]  text-white py-6 px-4">
+    <footer className="bg-gradient-to-r from-[#4AA58B] to-[#1C3F35] text-white py-6 px-4">
       <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
         {/* Commerce Section */}
         <div className="mb-4 sm:mb-0">
