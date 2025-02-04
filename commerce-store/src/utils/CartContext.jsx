@@ -1,6 +1,27 @@
 import React, { createContext, useState, useContext } from "react";
 
+const AuthContext = createContext(null);
 const CartContext = createContext();
+
+// Auth Provider Component
+export const AuthProvider = ({ children }) => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState(null);
+
+  const signIn = (userData) => {
+    setIsAuthenticated(true);
+    setUser(userData);
+  };
+
+  const logOut = () => {
+    setIsAuthenticated(false);
+    setUser(null);
+  };
+
+  const value = { isAuthenticated, user, signIn, logOut };
+  return React.createElement(AuthContext.Provider, { value }, children);
+};
+export { AuthContext };
 
 export const useCart = () => {
   const context = useContext(CartContext);
@@ -12,7 +33,7 @@ export const useCart = () => {
 
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
-  const [showCart, setShowCart] = useState(false);
+  // const [showCart, setShowCart] = useState(false);
 
   const addToCart = (product, trending, newArrivals) => {
     setCartItems((prevItems) => {
@@ -69,8 +90,6 @@ export const CartProvider = ({ children }) => {
 
   const value = {
     cartItems,
-    showCart,
-    setShowCart,
     addToCart,
     removeFromCart,
     updateQuantity,

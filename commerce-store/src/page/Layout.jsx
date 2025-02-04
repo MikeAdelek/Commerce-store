@@ -2,20 +2,22 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
-import { CartProvider } from "../utils/CartContext";
+import { CartProvider, AuthProvider } from "../utils/CartContext";
+import Login from "../Components/Login";
 
 const Layout = ({ children }) => {
   return (
-    <CartProvider>
-      <div className="flex flex-col min-h-screen">
+    <AuthProvider>
+      <CartProvider>
+        {/* <div className="flex flex-col min-h-screen"></div> */}
         <Header />
-        <main className="flex-grow">
+        <main>
           <Outlet />
           {children}
         </main>
         <Footer />
-      </div>
-    </CartProvider>
+      </CartProvider>
+    </AuthProvider>
   );
 };
 

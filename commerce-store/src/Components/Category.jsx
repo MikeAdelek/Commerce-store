@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Heart, Filter } from "lucide-react";
 import { categories, filters, products } from "./ProductDetails";
+import { useCart } from "../utils/CartContext";
 
 const Category = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [selectedFilters, setSelectedFilters] = useState({});
+  // const { addToCart } = useCart;
 
   const toggleFilter = () => {
     setIsFilterOpen(!isFilterOpen);
@@ -40,13 +42,13 @@ const Category = () => {
       <div className="max-w-7xl mx-auto px-4">
         {/* categories - scrollable on mobile */}
         <div className="flex gap-4 my-4 sm:my-6 overflow-x-auto whitespace-nowrap">
-          {categories.map((item) => (
+          {categories.map((nav) => (
             <NavLink
-              to="/"
-              key={item}
+              to="/home"
+              key={nav}
               className="inline-block flex-shrink-0 text-sm sm:text-base text-emerald-700 hover:underline"
             >
-              {item}
+              {nav}
             </NavLink>
           ))}
         </div>

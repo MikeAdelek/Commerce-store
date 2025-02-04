@@ -25,16 +25,16 @@ const HomePage = () => {
       <div className="py-2 sm:py-4">
         <div className="flex gap-8 my-4 sm:my-6 overflow-x-auto whitespace-nowrap">
           {/* Home Page Categories */}
-          {homeCategory.map((item) => (
+          {homeCategory.map((nav) => (
             <NavLink
               to="/category"
-              key={item}
-              onClick={() => setSelectedCategory(item)}
+              key={nav}
+              onClick={() => setSelectedCategory(nav)}
               className={`rounded-lg px-4 py-2 border border-emerald-700 flex-shrink-0 text-sm sm:text-base text-emerald-700 cursor-pointer transition-colors duration-200 ${
-                selectedCategory === item ? "bg-emerald-700 text-white" : ""
+                selectedCategory === nav ? "bg-emerald-700 text-white" : ""
               }`}
             >
-              {item}
+              {nav}
             </NavLink>
           ))}
         </div>
@@ -52,38 +52,38 @@ const HomePage = () => {
           </Link>
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6 p-4 md:p-8">
-          {newArrivals.map((item) => (
+          {newArrivals.map((product) => (
             <Link
-              key={item.id}
+              key={product.id}
               className="bg-white rounded-lg p-4 sm:p-8 flex flex-col shadow-md hover:shadow-lg transition-shadow duration-300"
             >
               <div className="relative mb-2 sm:mb-4 flex-shrink-0">
                 <img
-                  src={item.img}
-                  alt={item.name}
+                  src={product.img}
+                  alt={product.name}
                   className="w-full h-48 object-cover rounded-lg mb-4"
                 />
               </div>
               <div className="flex-grow flex flex-col justify-between">
                 <div>
                   <h3 className="font-semibold text-sm sm:text-base mb-1 sm:mb-2 truncate">
-                    {item.name}
+                    {product.name}
                   </h3>
                   <span className="block text-sm sm:text-base text-gray-400 mb-2">
-                    {item.size}
+                    {product.size}
                   </span>
                   <span className="block text-sm sm:text-base text-gray-400 mb-2">
-                    {item.color}
+                    {product.color}
                   </span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-orange-500 text-sm sm:text-base font-semibold">
-                    ₦ {item.price}
+                    ₦ {product.price}
                   </span>
                   <Link
-                    // to={`/productpage/${item.id}`}
-                    onClick={() => addToCart(item)}
-                    className="text-emerald-700 border border-emerald-700 px-2 py-1 rounded text-xs sm:text-sm"
+                    type="button"
+                    to={`/productpage/${product.id}`}
+                    className="-emerald-700 border border-emerald-700 px-2 py-1 rounded text-xs sm:text-sm"
                   >
                     Add to Cart
                   </Link>
@@ -103,36 +103,36 @@ const HomePage = () => {
           </button>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 p-4 md:p-8">
-          {trending.map((item) => (
+          {trending.map((product) => (
             <Link
-              key={item.id}
+              key={product.id}
               className="bg-white rounded-lg p-4 sm:p-8 flex flex-col shadow-md hover:shadow-lg transition-shadow duration-300"
             >
               <div className="relative mb-2 sm:mb-4 flex-shrink-0">
                 <img
-                  src={item.img}
-                  alt={item.name}
+                  src={product.img}
+                  alt={product.name}
                   className="w-full h-auto object-cover rounded-lg mb-4"
                 />
               </div>
               <div className="flex-grow flex flex-col justify-between">
                 <div>
                   <h3 className="font-semibold text-sm sm:text-base mb-1 sm:mb-2 truncate">
-                    {item.name}
+                    {product.name}
                   </h3>
                   <span className="block text-sm sm:text-base text-gray-400 mb-2">
-                    {item.size}
+                    {product.size}
                   </span>
                   <span className="block text-sm sm:text-base text-gray-400 mb-2">
-                    {item.color}
+                    {product.color}
                   </span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-orange-500 text-sm sm:text-base font-semibold">
-                    ₦ {item.price}
+                    ₦ {product.price}
                   </span>
                   <Link
-                    to={`/productpage/${item.id}`}
+                    to={`/productpage/${product.id}`}
                     className="text-emerald-700 border border-emerald-700 px-2 py-1 rounded text-xs sm:text-sm"
                   >
                     Add to Cart

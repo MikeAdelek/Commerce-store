@@ -1,34 +1,40 @@
+import "./index.css";
+import Layout from "./page/Layout";
+import Login from "./Components/Login";
 import Category from "./Components/Category";
-import ProductPage from "./Components/ProductPage";
 import HomePage from "./Components/HomePage";
-// import OrderSummary from "./Components/OrderSummary";
 import CartPage from "./Components/CartPage";
 import Checkout from "./Components/Checkout";
-import Layout from "./page/Layout";
-
-import { Routes, Route } from "react-router-dom";
-import "./index.css";
-
+import { Routes, Route, Navigate } from "react-router-dom";
+import ProductPage from "./Components/ProductPage";
+import ProtectedRoute from "./Components/ProtectedRoute";
 function App() {
   return (
     <Routes>
       <Route element={<Layout />}>
         {/* Home page Route */}
+        <Route path="/" element={<Navigate to="/login" replace />} />
+
+        {/* Login page Route*/}
+        <Route path="/login" element={<Login />} />
+
+        {/* Protected route for checkout page */}
         <Route
-          path="/"
+          path="/home"
           element={
-            <>
-              <HomePage path="/" />
-              {/* <Category /> */}
-            </>
+            <ProtectedRoute>
+              <HomePage />
+            </ProtectedRoute>
           }
         />
 
         {/* other route */}
-        <Route path="/productpage/:productId" element={<ProductPage />} />
+
+        {/* <Route path="/" element={<HomePage />} /> */}
+        <Route path="category" element={<Category />} />
         <Route path="/cartpage/:productId" element={<CartPage />} />
         <Route path="/checkout/:productId" element={<Checkout />} />
-        <Route path="category" element={<Category />} />
+        <Route path="/productpage/:productId" element={<ProductPage />} />
 
         {/* Add a catch-all route for 404 errors */}
         <Route
