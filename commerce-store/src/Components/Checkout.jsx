@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   ArrowLeft,
   Building2,
@@ -11,14 +11,19 @@ import {
 } from "lucide-react";
 import { useFormValidation } from "../utils/validateForm";
 
-const Checkout = () => {
+const Checkout = ({ onClose, setShowConfirmation }) => {
   const navigate = useNavigate();
 
-  const handleClose = () => {
-    navigate(-1); // go back to the previous page
-  };
+  // const handleClose = () => {
+  //   navigate(-1); // go back to the previous page
+  // };
   const { checkoutForm, setCheckoutForm, errors, validateCheckoutForm } =
-    useFormValidation();
+    useFormValidation({
+      name: "",
+      address: "",
+      phone: "",
+      email: ""
+    });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -32,12 +37,13 @@ const Checkout = () => {
         //Place API call
         await new Promise((resolve) => setTimeout(resolve, 1500));
         onClose();
-        setShowCOnfirmation(true);
+        setShowConfirmation(true);
       } finally {
         setIsSubmitting(false);
       }
     }
   };
+
   return (
     <div className="max-w-3xl mx-auto p-4">
       <Link to={`/cartpage/${product}`} className="mb-6">
@@ -140,7 +146,7 @@ const Checkout = () => {
           <div className="flex justify-end space-x-4 pb-4">
             <button
               type="submit"
-              onClick={handleClose}
+              // onClick={handleClose}
               className={`p-2 rounded-lg text-black bg-gray-400 hover:bg-emerald-800 hover:text-white ${
                 isSubmitting ? "opacity-50 cursor-not-allowed" : ""
               }`}

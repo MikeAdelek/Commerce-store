@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   Search,
   ShoppingCart,
@@ -9,20 +9,19 @@ import {
   X,
   Bell
 } from "lucide-react";
-import { useCart } from "../utils/CartContext";
+import Checkout from "./Checkout";
 import { Modal, Button, Result } from "antd";
+import { useCart } from "../utils/CartContext";
 
 const Header = ({ product }) => {
-  const navigate = useNavigate();
   const [showCheckout, setShowCheckout] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { showCart, setCart, setShowCart, cartItems, removeFromCart } =
-    useCart();
+  const { setCart, cartItems } = useCart();
 
-  const handleCartClick = () => {
-    navigate("/checkout");
-  };
+  // const handleCartClick = () => {
+  //   setShowCart(!showCart);
+  // };
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -74,7 +73,7 @@ const Header = ({ product }) => {
           </div>
 
           {/* Mobile Menu Toggle */}
-          <div className="md:hidden flex items-center space-x-4">
+          <div className="md:hidden">
             <button
               onClick={toggleMenu}
               className="text-emerald-700"
@@ -111,7 +110,7 @@ const Header = ({ product }) => {
           <div className="flex items-center space-x-4">
             <div className="hidden md:flex items-center space-x-4">
               <button
-                onClick={handleCartClick}
+                onClick={() => setShowCheckout(true)}
                 className="relative cursor-pointer"
               >
                 <ShoppingCart className="text-emerald-700" size={24} />
@@ -152,9 +151,9 @@ const Header = ({ product }) => {
             </div>
 
             {/* Mobile Icons */}
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between">
               <button
-                onClick={handleCartClick}
+                onClick={() => setShowCheckout(true)}
                 className="relative cursor-pointer"
               >
                 <ShoppingCart className="text-emerald-700" size={24} />
@@ -165,7 +164,7 @@ const Header = ({ product }) => {
                 )}
               </button>
               <button
-                onClick={handleCartClick}
+                onClick={() => setShowCheckout(true)}
                 className="cursor-pointer flex items-center space-x-2"
               >
                 <Heart className="text-emerald-700" size={24} />
@@ -178,6 +177,14 @@ const Header = ({ product }) => {
           </div>
         )}
 
+        {/* Checkout Component */}
+        {showCheckout && (
+          <Checkout
+            // product={`product/:checkout`}
+            onClose={() => setShowCheckout(false)}
+            setShowConfirmation={setShowConfirmation}
+          />
+        )}
         <OrderConfirmation />
       </div>
     </div>

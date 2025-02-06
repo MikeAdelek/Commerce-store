@@ -10,7 +10,7 @@ const ProtectedRoute = ({ children }) => {
   useEffect(() => {
     if (!isAuthenticated) {
       // save the current location
-      navigate("/login", {
+      navigate("/signup", {
         state: { from: location.pathname }
       });
     }

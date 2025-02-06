@@ -13,12 +13,32 @@ export const AuthProvider = ({ children }) => {
     setUser(userData);
   };
 
+  const signUp = async (userData) => {
+    setIsAuthenticated(false);
+    setUser(userData);
+
+    const newUser = {
+      id: Date.now(),
+      email: userData.email,
+      name: userData.name,
+      createdAt: new Date().toISOString()
+    };
+
+    // store this in local storage
+    localStorage.setItem(user, JSON.stringify(newUser));
+
+    setIsAuthenticated(true);
+    setUser(newUser);
+    return newUser;
+  };
+
   const logOut = () => {
+    localStorage.removeItem("user");
     setIsAuthenticated(false);
     setUser(null);
   };
 
-  const value = { isAuthenticated, user, signIn, logOut };
+  const value = { isAuthenticated, user, signIn, signUp, logOut };
   return React.createElement(AuthContext.Provider, { value }, children);
 };
 export { AuthContext };

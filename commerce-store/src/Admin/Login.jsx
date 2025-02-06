@@ -1,8 +1,9 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from "../utils/CartContext";
 import React, { useState, useContext } from "react";
 import { AlertCircle, Eye, EyeOff } from "lucide-react";
 import { useFormValidation } from "../utils/validateForm";
+import SignUpPage from "../Admin/SignUp";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -82,7 +83,7 @@ const Login = () => {
                 required
                 className={`mt-1 appearance-none relative block w-full px-3 py-2 border ${
                   errors.email ? "border-red-300" : "border-gray-300"
-                } rounded-md placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm`}
+                } rounded-md placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-emerald-800 focus:border-emerald-800 sm:text-sm`}
                 placeholder="Enter your email"
                 value={formData.email}
                 onChange={handleChange}
@@ -108,7 +109,7 @@ const Login = () => {
                 required
                 className={`appearance-none relative block w-full px-3 py-2 border ${
                   errors.password ? "border-red-300" : "border-gray-300"
-                } rounded-md placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm`}
+                } rounded-md placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-emerald-800 focus:border-emerald-800 sm:text-sm`}
                 placeholder="Enter your password"
                 value={formData.password}
                 onChange={handleChange}
@@ -139,12 +140,23 @@ const Login = () => {
                 isSubmitting
                   ? "bg-emerald-700 cursor-not-allowed"
                   : "bg-emerald-700 hover:bg-emerald-800"
-              } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-700`}
+              } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-800`}
             >
               {isSubmitting ? "Signing in..." : "Sign in to continue"}
             </button>
           </div>
         </form>
+        <div className="text-center">
+          <p className="text-sm text-gray-600">
+            Don't have an account?{" "}
+            <Link
+              to="/signup"
+              className="font-medium text-emerald-800 hover:text-emerald-700"
+            >
+              Sign Up
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );

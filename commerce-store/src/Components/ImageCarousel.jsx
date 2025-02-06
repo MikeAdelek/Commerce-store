@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { slides } from "./ProductDetails";
+import React, { useState, useEffect } from "react";
 
 const ImageCarousel = ({ autoSlide = true, autoSlideInterval = 5000 }) => {
   // state to track current slide index

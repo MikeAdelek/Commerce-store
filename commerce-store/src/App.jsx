@@ -1,22 +1,25 @@
 import "./index.css";
+import Login from "./Admin/Login";
 import Layout from "./page/Layout";
-import Login from "./Components/Login";
+import SignUpPage from "./Admin/SignUp";
 import Category from "./Components/Category";
 import HomePage from "./Components/HomePage";
 import CartPage from "./Components/CartPage";
 import Checkout from "./Components/Checkout";
-import { Routes, Route, Navigate } from "react-router-dom";
 import ProductPage from "./Components/ProductPage";
 import ProtectedRoute from "./Components/ProtectedRoute";
+import { Routes, Route, Navigate } from "react-router-dom";
+
 function App() {
   return (
     <Routes>
       <Route element={<Layout />}>
-        {/* Home page Route */}
-        <Route path="/" element={<Navigate to="/login" replace />} />
+        {/* Sign Up page Route */}
+        <Route path="/" element={<Navigate to="/signup" replace />} />
 
         {/* Login page Route*/}
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUpPage />} />
 
         {/* Protected route for checkout page */}
         <Route
@@ -35,6 +38,7 @@ function App() {
         <Route path="/cartpage/:productId" element={<CartPage />} />
         <Route path="/checkout/:productId" element={<Checkout />} />
         <Route path="/productpage/:productId" element={<ProductPage />} />
+        {/* <Route path="/login" element={<Login />} /> */}
 
         {/* Add a catch-all route for 404 errors */}
         <Route
