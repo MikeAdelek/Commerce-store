@@ -291,3 +291,15 @@ export const socialLinks = [
   { icon: <InstagramIcon />, href: "#" }, // Instagram
   { icon: <LinkedinIcon />, href: "#" } // LinkedIn
 ];
+
+export const userItems = [
+  "Overview",
+  "History",
+  "Product",
+  "Sales Order",
+  "Relationship",
+  "Notifications",
+  "Feedback",
+  "Help",
+  "Settings"
+];

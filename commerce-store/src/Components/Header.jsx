@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Avatar from "../assets/user3.jpg";
 import {
   Search,
   ShoppingCart,
@@ -7,7 +8,8 @@ import {
   MicIcon,
   Menu,
   X,
-  Bell
+  Bell,
+  User
 } from "lucide-react";
 import Checkout from "./Checkout";
 import { Modal, Button, Result } from "antd";
@@ -18,10 +20,11 @@ const Header = ({ product }) => {
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { setCart, cartItems } = useCart();
+  const navigate = useNavigate();
 
-  // const handleCartClick = () => {
-  //   setShowCart(!showCart);
-  // };
+  const handleAdminClick = () => {
+    navigate("/user");
+  };
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -60,8 +63,8 @@ const Header = ({ product }) => {
 
   return (
     <div className="w-full p-3 sm:p-4 border-b">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex items-center justify-between ">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link
@@ -73,17 +76,13 @@ const Header = ({ product }) => {
           </div>
 
           {/* Mobile Menu Toggle */}
-          <div className="md:hidden">
+          <div className="md:hidden ">
             <button
               onClick={toggleMenu}
               className="text-emerald-700"
               aria-label="Toggle Menu"
             >
-              {isMenuOpen ? (
-                <X size={24} />
-              ) : (
-                <Menu size={24} className="text-black items-center" />
-              )}
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
 
@@ -125,6 +124,16 @@ const Header = ({ product }) => {
               </button>
               <button className="cursor-pointer">
                 <Bell className="text-emerald-700" size={24} />
+              </button>
+              <button onClick={handleAdminClick} className="cursor-pointer">
+                <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
+                  <User size={20} className="text-white" />
+                  <img
+                    src={Avatar}
+                    alt="userImg"
+                    className="w-full rounded-full object-contain"
+                  />
+                </div>
               </button>
             </div>
           </div>
@@ -172,6 +181,12 @@ const Header = ({ product }) => {
               </button>
               <button className="cursor-pointer">
                 <Bell className="text-emerald-700" size={24} />
+              </button>
+              <button
+                onClick={handleAdminClick}
+                className="cursor-pointer flex items-center space-x-2"
+              >
+                <User className="text-emerald-700" size={24} />
               </button>
             </div>
           </div>

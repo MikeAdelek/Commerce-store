@@ -1,6 +1,7 @@
 import "./index.css";
 import Login from "./Admin/Login";
 import Layout from "./page/Layout";
+import User from "./Components/User";
 import SignUpPage from "./Admin/SignUp";
 import Category from "./Components/Category";
 import HomePage from "./Components/HomePage";
@@ -34,7 +35,8 @@ function App() {
         {/* other route */}
 
         {/* <Route path="/" element={<HomePage />} /> */}
-        <Route path="category" element={<Category />} />
+        <Route path="/user" element={<User />} />
+        <Route path="/category" element={<Category />} />
         <Route path="/cartpage/:productId" element={<CartPage />} />
         <Route path="/checkout/:productId" element={<Checkout />} />
         <Route path="/productpage/:productId" element={<ProductPage />} />
