@@ -177,7 +177,7 @@ const Header = ({ product }) => {
                 className="cursor-pointer flex items-center space-x-2"
               >
                 <Heart className="text-emerald-700" size={24} />
-                <span className="text-black">Wishlist</span>
+                {/* <span className="text-black">Wishlist</span> */}
               </button>
               <button className="cursor-pointer">
                 <Bell className="text-emerald-700" size={24} />
