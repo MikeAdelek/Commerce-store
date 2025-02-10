@@ -160,7 +160,7 @@ const Header = ({ product }) => {
             </div>
 
             {/* Mobile Icons */}
-            <div className="flex justify-between">
+            <div className="flex justify-between items-center">
               <button
                 onClick={() => setShowCheckout(true)}
                 className="relative cursor-pointer"
