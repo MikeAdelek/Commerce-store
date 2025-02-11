@@ -118,12 +118,6 @@ npm start        # Start production server
 npm run lint     # Run linting
 ```
 
-### Type Checking
-
-```bash
-npm run type-check  # Run TypeScript compiler
-```
-
 ## Contributing
 
 1. Fork the repository
@@ -146,8 +140,8 @@ Common issues and solutions:
    # Clean install dependencies
    npm clean-install
    
-   # Remove .next folder and rebuild
-   rm -rf .next
+   # Remove .vite folder and rebuild
+   rm -rf .vite
    npm run build
    ```
 
