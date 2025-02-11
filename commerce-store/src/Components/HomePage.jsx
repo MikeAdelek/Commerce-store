@@ -9,6 +9,7 @@ import {
 import ImageCarousel from "./ImageCarousel";
 import { ArrowRightIcon } from "lucide-react";
 import { useCart } from "../utils/CartContext";
+import { motion } from "framer-motion";
 
 const HomePage = () => {
   const [selectedCategory, setSelectedCategory] = useState("NEW");
@@ -21,7 +22,12 @@ const HomePage = () => {
       : products.filter((product) => product.category === selectedCategory);
 
   return (
-    <section className="max-w-7xl mx-auto px-4 sm:px-6 ">
+    <motion.section
+      initial={{ y: 30, opacity: 0 }}
+      whileInView={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="max-w-7xl mx-auto px-4 sm:px-6 "
+    >
       <div className="py-2 sm:py-4">
         <div className="flex gap-8 my-4 sm:my-6 overflow-x-auto whitespace-nowrap">
           {/* Home Page Categories */}
@@ -143,7 +149,7 @@ const HomePage = () => {
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

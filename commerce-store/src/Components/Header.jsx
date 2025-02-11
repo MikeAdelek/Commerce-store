@@ -11,11 +11,10 @@ import {
   Bell,
   User
 } from "lucide-react";
-import Checkout from "./Checkout";
-import { Modal, Button, Result } from "antd";
 import { useCart } from "../utils/CartContext";
+import { motion } from "framer-motion";
 
-const Header = ({ product }) => {
+const Header = () => {
   const [showCheckout, setShowCheckout] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -30,40 +29,51 @@ const Header = ({ product }) => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const OrderConfirmation = () => {
-    <Modal
-      open={showConfirmation}
-      onCancel={() => setShowConfirmation(false)}
-      footer={[
-        <Button
-          key="continue"
-          type="success"
-          onClick={() => {
-            setShowConfirmation(false);
-            setCart([]); //clear cart
-          }}
-        >
-          Continue Shopping
-        </Button>
-      ]}
-      centered
-      maskClosable={false}
-    >
-      <Result
-        status="success"
-        title="Order Confirmed!"
-        subTitle={
-          <span className="text-gray-600">
-            Thank you for your purchase. You will receive a confirmation shortly
-          </span>
-        }
-      />
-    </Modal>;
-  };
+  // const OrderConfirmation = () => {
+  //   return (
+  //     <Modal
+  //       open={showConfirmation}
+  //       onCancel={() => setShowConfirmation(false)}
+  //       footer={[
+  //         <Button
+  //           key="continue"
+  //           type="success"
+  //           onClick={() => {
+  //             setShowConfirmation(false);
+  //             setCart([]); //clear cart
+  //           }}
+  //         >
+  //           Continue Shopping
+  //         </Button>
+  //       ]}
+  //       centered
+  //       maskClosable={false}
+  //     >
+  //       <Result
+  //         status="success"
+  //         title="Order Confirmed!"
+  //         subTitle={
+  //           <span className="text-gray-600">
+  //             Thank you for your purchase. You will receive a confirmation
+  //             shortly
+  //           </span>
+  //         }
+  //       />
+  //     </Modal>
+  //   );
+  // };
 
   return (
     <div className="w-full p-3 sm:p-4 border-b">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <motion.div
+        initial={{ y: 30, opacity: 0 }}
+        whileInView={{
+          y: 0,
+          opacity: 1
+        }}
+        transition={{ duration: 1 }}
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+      >
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex-shrink-0">
@@ -108,23 +118,20 @@ const Header = ({ product }) => {
           {/* Icons */}
           <div className="flex items-center space-x-4">
             <div className="hidden md:flex items-center space-x-4">
-              <button
-                onClick={() => setShowCheckout(true)}
-                className="relative cursor-pointer"
-              >
+              <Link to="/checkout" className="relative cursor-pointer">
                 <ShoppingCart className="text-emerald-700" size={24} />
                 {cartItems.length > 0 && (
                   <span className="absolute -top-2 -right-2 bg-emerald-700 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
                     {cartItems.length}
                   </span>
                 )}
-              </button>
-              <button className="cursor-pointer">
+              </Link>
+              {/* <button className="cursor-pointer">
                 <Heart className="text-emerald-700" size={24} />
-              </button>
-              <button className="cursor-pointer">
+              </button> */}
+              {/* <button className="cursor-pointer">
                 <Bell className="text-emerald-700" size={24} />
-              </button>
+              </button> */}
               <button onClick={handleAdminClick} className="cursor-pointer">
                 <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
                   <User size={20} className="text-white" />
@@ -161,27 +168,24 @@ const Header = ({ product }) => {
 
             {/* Mobile Icons */}
             <div className="flex justify-between items-center">
-              <button
-                onClick={() => setShowCheckout(true)}
-                className="relative cursor-pointer"
-              >
+              <Link to="/checkout" className="relative cursor-pointer">
                 <ShoppingCart className="text-emerald-700" size={24} />
                 {cartItems.length > 0 && (
                   <span className="absolute -top-2 -right-2 bg-emerald-700 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
                     Cart ({cartItems.length})
                   </span>
                 )}
-              </button>
-              <button
+              </Link>
+              {/* <button
                 onClick={() => setShowCheckout(true)}
                 className="cursor-pointer flex items-center space-x-2"
               >
                 <Heart className="text-emerald-700" size={24} />
-                {/* <span className="text-black">Wishlist</span> */}
+                
               </button>
               <button className="cursor-pointer">
                 <Bell className="text-emerald-700" size={24} />
-              </button>
+              </button> */}
               <button
                 onClick={handleAdminClick}
                 className="cursor-pointer flex items-center space-x-2"
@@ -192,16 +196,8 @@ const Header = ({ product }) => {
           </div>
         )}
 
-        {/* Checkout Component */}
-        {showCheckout && (
-          <Checkout
-            // product={`product/:checkout`}
-            onClose={() => setShowCheckout(false)}
-            setShowConfirmation={setShowConfirmation}
-          />
-        )}
-        <OrderConfirmation />
-      </div>
+        {/* <OrderConfirmation /> */}
+      </motion.div>
     </div>
   );
 };

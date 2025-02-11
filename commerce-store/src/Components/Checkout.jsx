@@ -1,55 +1,19 @@
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  ArrowLeft,
-  Building2,
-  CreditCard,
-  Gift,
-  User,
-  User2,
-  Phone
-} from "lucide-react";
-import { useFormValidation } from "../utils/validateForm";
+import { ArrowLeft, Building2, CreditCard, Gift } from "lucide-react";
 
-const Checkout = ({ onClose, setShowConfirmation }) => {
+const Checkout = () => {
   const navigate = useNavigate();
 
-  // const handleClose = () => {
-  //   navigate(-1); // go back to the previous page
-  // };
-  const { checkoutForm, setCheckoutForm, errors, validateCheckoutForm } =
-    useFormValidation({
-      name: "",
-      address: "",
-      phone: "",
-      email: ""
-    });
-
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (validateCheckoutForm()) {
-      try {
-        setIsSubmitting(true);
-
-        //Place API call
-        await new Promise((resolve) => setTimeout(resolve, 1500));
-        onClose();
-        setShowConfirmation(true);
-      } finally {
-        setIsSubmitting(false);
-      }
-    }
+  const handleClose = () => {
+    navigate(-1); // go back to the previous page
   };
 
   return (
     <div className="max-w-3xl mx-auto p-4">
-      <Link to={`/cartpage/${product}`} className="mb-6">
+      <button onClick={handleClose} className="mb-6">
         <ArrowLeft className="text-gray-600" />
-      </Link>
-
+      </button>
       {/* Order Summary */}
       <div className="bg-white p-4 rounded-lg mb-6">
         <h2 className="text-gray-600 text-lg mb-4">Order Summary</h2>
@@ -68,109 +32,74 @@ const Checkout = ({ onClose, setShowConfirmation }) => {
           </div>
         </div>
       </div>
-
-      <form onSubmit={handleSubmit}>
-        <div className="space-y-4 max-w-2xl mx-auto px-4 sm:px-6 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+      {/* Payment Method  */}
+      <div className="bg-white p-4 rounded-lg mb-6">
+        <h2 className="text-gray-600 text-lg mb-4">Payment Methods</h2>
+        <div className="space-y-4">
           <div className="relative">
             <input
               type="text"
-              name="Full Name"
-              id="Full Name"
-              placeholder="janeSmith"
-              value={checkoutForm.name}
-              onChange={(e) =>
-                setCheckoutForm({ ...checkoutForm, name: e.target.value })
-              }
-              className={`w-full pl-10 mr-4 p-2 border rounded-lg ${
-                errors.name ? "border-red-500 " : "border-emerald-700"
-              }`}
+              name="Bank"
+              placeholder="WithBank..."
+              className="border border-blue-500 rounded-lg p-4 pl-12 w-full"
             />
-            <User2 className="absolute left-3 top-2.5 items-center" />
-            {errors.name && (
-              <p className="text-red-500 text-sm mt-1">{errors.name}</p>
-            )}
+            <Building2 className="text-gray-600 absolute left-3.5 top-4" />
+            {/* <span className="text-gray-500">With Bank...</span> */}
           </div>
           <div className="relative">
             <input
-              type="email"
-              name="Email"
-              id="Email"
-              placeholder="janeSmith@example.com"
-              value={checkoutForm.email}
-              onChange={(e) =>
-                setCheckoutForm({ ...checkoutForm, email: e.target.value })
-              }
-              className={`w-full pl-10 mr-4 p-2 border rounded-lg ${
-                errors.email ? "border-red-500 " : "border-emerald-700"
-              }`}
+              type="text"
+              name="Card"
+              placeholder="WithCard..."
+              className="border border-blue-500 rounded-lg p-4 pl-12 w-full"
             />
-            <User className="absolute left-3 top-2.5 items-center" />
-            {errors.email && (
-              <p className="text-red-500 text-sm mt-1">{errors.email}</p>
-            )}
+            <CreditCard className="text-gray-600 absolute left-3.5 top-4" />
+            {/* <span className="text-gray-500">With Bank...</span> */}
           </div>
           <div className="relative">
             <input
-              type="tel"
-              name="Phone Number"
-              id="Phone Number"
-              placeholder="+234 555 555 5555"
-              value={checkoutForm.phone}
-              onChange={(e) =>
-                setCheckoutForm({ ...checkoutForm, phone: e.target.value })
-              }
-              className={`w-full pl-10 mr-4 p-2 border rounded-lg ${
-                errors.phone ? "border-red-500 " : "border-emerald-700"
-              }`}
+              type="text"
+              name="Coupons"
+              placeholder="WithCoupons..."
+              className="border border-blue-500 rounded-lg p-4 pl-12 w-full"
             />
-            <Phone className="absolute left-3 top-2.5 items-center" />
-            {errors.phone && (
-              <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
-            )}
+            <Gift className="text-gray-600 absolute left-3.5 top-4" />
+            {/* <span className="text-gray-500">With Bank...</span> */}
           </div>
-          <p className="text-sm">other payment alternative?</p>
-          <div className="flex items-center space-x-4 text-sm">
-            <div className="flex cursor-pointer">
-              <Gift size={20} className="text-emerald-700 mr-2" />
-              <span>Pay with Gift Card</span>
-            </div>
-            <div className="flex cursor-pointer">
-              <CreditCard size={20} className="text-emerald-700 mr-2" />
-              <span>Pay with Credit Card</span>
-            </div>
-            <div className="flex cursor-pointer">
-              <Building2 size={20} className="text-emerald-700 mr-2" />
-              <span>Pay with PayPal</span>
-            </div>
-          </div>
-          <div className="flex justify-end space-x-4 pb-4">
-            <button
-              type="submit"
-              // onClick={handleClose}
-              className={`p-2 rounded-lg text-black bg-gray-400 hover:bg-emerald-800 hover:text-white ${
-                isSubmitting ? "opacity-50 cursor-not-allowed" : ""
-              }`}
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className={`p-2 rounded-lg text-white bg-emerald-700 hover:bg-emerald-800 ${
-                isSubmitting ? "opacity-50 cursor-not-allowed" : ""
-              }`}
-            >
-              {isSubmitting ? "Processing" : "Place Order"}
-            </button>
-          </div>
-          {isSubmitting && (
-            <div className="text-gray-600 text-sm mt-2">Submitting...</div>
-          )}
-          {errors.general && (
-            <p className="text-red-500 text-sm mt-2">{errors.general}</p>
-          )}
         </div>
-      </form>
+      </div>
+      {/* Address  */}
+      <div className="bg-white rounded-lg mb-6">
+        <h2 className="text-gray-600 text-lg mb-4">Address</h2>
+        <p className="text-gray-500 mb-4">
+          Lorem ipsum dolor sit amet, vel earum consequunter nem voluptatum quod
+          et cumque quas in numquam experimens. A pariatur rerum qui magni nemo
+          ut magni labore ut dolor amet et dolorum sequi sed consequatur
+          exercitationem nam eligendi architecto.
+        </p>
+        <div className="flex gap-4">
+          <button className="bg-orange-500 text-white px-6 py-2 rounded-lg">
+            Confirm Address
+          </button>
+          <button className="border border-gray-300 text-gray-600 px-6 py-2 rounded-lg">
+            Change Address
+          </button>
+        </div>
+      </div>
+      {/* Delivery Records */}
+      <div className="bg-white rounded-lg mb-6">
+        <h2 className="text-gray-600 text-lg mb-4">Delivery Records</h2>
+        <p className="text-gray-500 mb-4">
+          Lorem ipsum dolor sit amet, vel earum consequunter nem voluptatum quod
+          et cumque quas in numquam experimens. A pariatur rerum qui magni nemo
+          ut magni labore ut dolor amet et dolorum sequi sed consequatur
+          exercitationem nam eligendi architecto.
+        </p>
+      </div>
+      {/* Confirm Order Button  */}
+      <button className="w-full bg-orange-500 text-white py-3 rounded-lg">
+        Confirm Order
+      </button>
     </div>
   );
 };
