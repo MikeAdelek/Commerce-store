@@ -16,54 +16,31 @@ function App() {
     <Routes>
       <Route element={<Layout />}>
         {/* Sign Up page Route */}
-        <Route path="/" element={<Navigate to="/signup" replace />} />
+        <Route path="/" element={<Navigate to="/home" replace />} />
 
-        {/* Login page Route*/}
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/home" element={<HomePage />} />
 
         {/* Protected route for checkout page */}
         <Route
-          path="/home"
+          path="/checkout"
           element={
             <ProtectedRoute>
-              <HomePage />
+              <checkout />
             </ProtectedRoute>
           }
         />
 
         {/* other route */}
-        {/* Add checkout success route */}
-        {/* <Route
-          path="/checkout-success"
-          element={
-            <div className="flex items-center justify-center min-h-screen">
-              <div className="text-center">
-                <h1 className="text-2xl font-bold text-emerald-700 mb-4">
-                  Order Confirmed!
-                </h1>
-                <p className="text-gray-600 mb-4">
-                  Thank you for your purchase. You will receive a confirmation
-                  shortly.
-                </p>
-                <button
-                  onClick={() => (window.location.href = "/home")}
-                  className="bg-emerald-700 text-white px-4 py-2 rounded-lg hover:bg-emerald-800"
-                >
-                  Continue Shopping
-                </button>
-              </div>
-            </div>
-          }
-        /> */}
 
-        {/* <Route path="/" element={<HomePage />} /> */}
         <Route path="/user" element={<User />} />
         <Route path="/category" element={<Category />} />
         <Route path="/cartpage/:productId" element={<CartPage />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/productpage/:productId" element={<ProductPage />} />
-        {/* <Route path="/login" element={<Login />} /> */}
+
+        {/* Login page Route*/}
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUpPage />} />
 
         {/* Add a catch-all route for 404 errors */}
         <Route

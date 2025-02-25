@@ -7,7 +7,7 @@ import { useCart } from "../utils/CartContext";
 const Category = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [selectedFilters, setSelectedFilters] = useState({});
-  // const { addToCart } = useCart;
+  const { addToCart } = useCart();
 
   const toggleFilter = () => {
     setIsFilterOpen(!isFilterOpen);
@@ -189,12 +189,13 @@ const Category = () => {
                       <span className="text-orange-500 text-sm sm:text-base font-semibold">
                         ₦ {product.price}
                       </span>
-                      <Link
-                        to={`/productpage/${product.id}`}
+                      <button
+                        type="button"
+                        onClick={() => addToCart(product)}
                         className="text-emerald-700 border border-emerald-700 px-2 py-1 rounded text-xs sm:text-sm"
                       >
                         Add to Cart
-                      </Link>
+                      </button>
                     </div>
                   </div>
                 </Link>

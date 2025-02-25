@@ -4,7 +4,7 @@ import { ArrowLeft, ShoppingCart, Heart, Share2, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useCart } from "../utils/CartContext";
 
-const ProductPage = ({ product }) => {
+const ProductPage = ({ productId }) => {
   const [selectedImage, setSelectedImage] = useState(0);
   const [selectedColor, setSelectedColor] = useState("green");
   const { addToCart } = useCart();
