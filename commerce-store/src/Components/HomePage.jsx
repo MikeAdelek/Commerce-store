@@ -63,7 +63,7 @@ const HomePage = () => {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
-        className="my-8 p-8 sm:p-8"
+        className="my-8 p-12 sm:p-8"
       >
         <TrendingProduct />
       </motion.div>
