@@ -4,6 +4,7 @@ import { homeCategory } from "./ProductDetails";
 import ImageCarousel from "./ImageCarousel";
 import { motion } from "framer-motion";
 import Product from "./Product";
+
 import TrendingProduct from "./TrendingProduct";
 import { containerVariants, fadeIn } from "./Animation";
 
