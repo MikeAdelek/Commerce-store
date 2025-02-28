@@ -17,7 +17,7 @@ const Header = () => {
     if (isAuthenticated) {
       setIsProfileMenuOpen(!isProfileMenuOpen);
     } else {
-      navigate("login");
+      navigate("/login");
     }
   };
 
