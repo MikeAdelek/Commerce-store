@@ -16,11 +16,11 @@ const HomePage = () => {
       initial="hidden"
       animate="visible"
       variants={containerVariants}
-      className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20"
+      className="max-w-7xl mx-auto px-2 sm:px-4 pt-16 sm:pt-20 md:pt-24"
     >
       <motion.div
         variants={containerVariants}
-        className="flex gap-8 my-4 sm:my-6 flex-wrap"
+        className="flex overflow-x-auto md:flex-wrap gap-2 sm:gap-3 md:gap-4 my-3 sm:my-4 md:my-6 pb-2 hide-scrollbar"
       >
         {/* Home Page Categories */}
         {homeCategory.map((nav, index) => (
@@ -33,10 +33,12 @@ const HomePage = () => {
           >
             <NavLink
               to="/category"
+              className={({ isActive }) =>
+                `rounded-lg px-3 py-1.5 sm:px-4 sm:py-2 border border-emerald-700 text-xs sm:text-sm md:text-base text-emerald-700 cursor-pointer whitespace-nowrap ${
+                  selectedCategory === nav ? "bg-emerald-700 text-white" : ""
+                }`
+              }
               onClick={() => setSelectedCategory(nav)}
-              className={`rounded-lg px-4 py-2 border border-emerald-700 text-sm sm:text-base text-emerald-700 cursor-pointer ${
-                selectedCategory === nav ? "bg-emerald-700 text-white" : ""
-              }`}
             >
               {nav}
             </NavLink>

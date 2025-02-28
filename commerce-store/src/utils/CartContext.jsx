@@ -1,65 +1,156 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
 
-const AuthContext = createContext(null);
+const AuthContext = createContext();
 const CartContext = createContext();
+
+export const useAuth = () => {
+  return useContext(AuthContext);
+};
 
 // Auth Provider Component
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const signIn = (userData) => {
-    setIsAuthenticated(true);
-    setUser(userData);
-  };
+  // check if user is logged in on mount
+  useEffect(() => {
+    const checkAuthStatus = async () => {
+      // Check if user is authenticated from local storage or JWT token
+      // If authenticated, set user and isAuthenticated state
+      // If not, clear local storage and isAuthenticated state
+      try {
+        const token = localStorage.getItem("authToken");
 
-  const signUp = async (userData) => {
-    setIsAuthenticated(false);
-    setUser(userData);
+        if (token) {
+          // validate the token with backend here
+          // for demo, set user has authenticated
 
-    const newUser = {
-      id: Date.now(),
-      email: userData.email,
-      name: userData.name,
-      createdAt: new Date().toISOString()
+          // Get user data from storage or decode from JWT
+          const userData = JSON.parse(localStorage.getItem("userData") || `{}`);
+
+          setUser(userData);
+          setIsAuthenticated(true);
+        }
+      } catch (error) {
+        console.error("Auth check error:", error);
+        // clear potentially expired token
+        localStorage.removeItem("authToken");
+        localStorage.removeItem("userData");
+      } finally {
+        setLoading(false);
+      }
     };
+    checkAuthStatus();
+  }, []);
 
-    // store this in local storage
-    localStorage.setItem(user, JSON.stringify(newUser));
+  // signIn function
+  const signIn = async (email, password) => {
+    try {
+      // call your authentication API here
+      // for demo purposes, we'll simulate a successful login
 
-    setIsAuthenticated(true);
-    setUser(newUser);
-    return newUser;
+      // simulate API response
+      const response = {
+        token: "fake-jwt-token",
+        user: {
+          id: "123",
+          name: "Jane Doe",
+          email: email
+        }
+      };
+
+      // store auth data
+      localStorage.setItem("authToken", response.token);
+      localStorage.setItem("userData", JSON.stringify(response.user));
+
+      // update state
+      setUser(response.user);
+      setIsAuthenticated(true);
+
+      return { success: true, message: "Login successful" };
+    } catch (error) {
+      console.error("Login error:", error);
+      return {
+        success: false,
+        error: error.message || "Failed to Login, Please try again"
+      };
+    }
   };
 
-  const logOut = () => {
-    localStorage.removeItem("user");
-    setIsAuthenticated(false);
+  // signOut function
+  const signOut = () => {
+    // clear auth data
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("userData");
+
+    // update state
     setUser(null);
+    setIsAuthenticated(false);
   };
 
-  const value = { isAuthenticated, user, signIn, signUp, logOut };
-  return React.createElement(AuthContext.Provider, { value }, children);
+  // register function
+  const register = async (name, email, password) => {
+    try {
+      // call your registration API here
+      // for demo purposes, we'll simulate a successful registration
+
+      // after registration log user in
+      const loginResult = await signIn(email, password);
+      return loginResult;
+    } catch (error) {
+      console.error("Registration error:", error);
+      return {
+        success: false,
+        error: error.message || "Failed to Register, Please try again"
+      };
+    }
+  };
+
+  const value = {
+    isAuthenticated,
+    loading,
+    user,
+    login: signIn,
+    LogOut: signOut,
+    register
+  };
+  return (
+    <AuthContext.Provider value={value}>
+      {!loading && children}
+    </AuthContext.Provider>
+  );
 };
+
 export { AuthContext };
 
 export const useCart = () => {
   const context = useContext(CartContext);
   if (!context) {
-    throw new Error("useCart must be within a CartProvider");
+    throw new Error("useCart must be used within a CartProvider");
   }
   return context;
 };
 
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
-  // const [showCart, setShowCart] = useState(false);
 
-  // load cart from a local storage
+  // load cart from local storage
   useEffect(() => {
     const savedCart = localStorage.getItem("cartItems");
     if (savedCart) {
-      setCartItems(JSON.parse(savedCart));
+      try {
+        const parsedCart = JSON.parse(savedCart);
+        // ensure all items have a numeric price
+        const fixedCart = parsedCart.map((item) => ({
+          ...item,
+          price: parseFloat(item.price) || 0
+        }));
+        setCartItems(fixedCart);
+      } catch (error) {
+        console.error("Error parsing Cart:", error);
+        setCartItems([]);
+      }
     }
   }, []);
 
@@ -69,19 +160,19 @@ export const CartProvider = ({ children }) => {
 
   const addToCart = (product) => {
     setCartItems((prevItems) => {
-      // check if the item already exist in the cart
+      // check if the item already exists in the cart
       const existingItem = prevItems.find((item) => item.id === product.id);
 
       if (existingItem) {
         // If item exists, increment quantity
         return prevItems.map((item) =>
           item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
+            ? { ...item, quantity: item.quantity + (product.quantity || 1) }
             : item
         );
       }
-      // if items does not exists, add it with quantity 1
-      return [...prevItems, { ...product, quantity: 1 }];
+      // if item does not exist, add it
+      return [...prevItems, { ...product, quantity: product.quantity || 1 }];
     });
   };
 
@@ -91,19 +182,12 @@ export const CartProvider = ({ children }) => {
     );
   };
 
-  const updateQuantity = (
-    productId,
-    trendingId,
-    newArrivalsId,
-    newQuantity
-  ) => {
+  const updateQuantity = (productId, newQuantity) => {
     if (newQuantity < 1) return;
 
     setCartItems((prevItems) =>
       prevItems.map((item) =>
-        item.id === productId || trendingId || newArrivalsId
-          ? { ...item, quantity: newQuantity }
-          : item
+        item.id === productId ? { ...item, quantity: newQuantity } : item
       )
     );
   };
@@ -112,7 +196,7 @@ export const CartProvider = ({ children }) => {
     setCartItems([]);
   };
 
-  //calculate total price
+  // calculate total price
   const total = cartItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
@@ -127,7 +211,7 @@ export const CartProvider = ({ children }) => {
     total
   };
 
-  return React.createElement(CartContext.Provider, { value }, children);
+  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };
 
 export { CartContext };

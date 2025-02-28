@@ -1,13 +1,13 @@
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import playStore from "../assets/Android.png";
 import appleStore from "../assets/Vector.png";
 import { footerSections, socialLinks } from "./ProductDetails";
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-r from-[#4AA58B] to-[#1C3F35] text-white">
-      <div className="max-w-6xl mx-auto py-6 px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
+    <footer className="bg-gradient-to-r from-[#4AA58B] to-[#1C3F35] text-white w-full">
+      <div className="max-w-6xl mx-auto py-6 px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
         {/* Commerce Section */}
         <div className="mb-4 sm:mb-0">
           <h3 className="font-bold mb-4 text-sm sm:text-base">COMMERCE</h3>
@@ -47,7 +47,7 @@ const Footer = () => {
         {/* About Section */}
         <div className="mb-4 sm:mb-0">
           <h3 className="font-bold mb-4 text-sm sm:text-base">ABOUT</h3>
-          <Link className="space-y-3 flex flex-col">
+          <div className="space-y-3 flex flex-col">
             {footerSections.ABOUT.map((item) => (
               <NavLink
                 to={item.href}
@@ -57,13 +57,13 @@ const Footer = () => {
                 {item.name}
               </NavLink>
             ))}
-          </Link>
+          </div>
         </div>
 
         {/* Resources Section */}
         <div className="mb-4 sm:mb-0">
           <h3 className="font-bold mb-4 text-sm sm:text-base">RESOURCES</h3>
-          <Link className="space-y-3 flex flex-col">
+          <div className="space-y-3 flex flex-col">
             {footerSections.RESOURCES.map((item) => (
               <NavLink
                 to={item.href}
@@ -73,13 +73,13 @@ const Footer = () => {
                 {item.name}
               </NavLink>
             ))}
-          </Link>
+          </div>
         </div>
 
         {/* Payment Section */}
         <div className="mb-4 sm:mb-0">
           <h3 className="font-bold mb-4 text-sm sm:text-base">PAYMENT</h3>
-          <Link className="space-y-3 flex flex-col">
+          <div className="space-y-3 flex flex-col">
             {footerSections.PAYMENT.map((item) => (
               <NavLink
                 to={item.href}
@@ -89,11 +89,11 @@ const Footer = () => {
                 {item.name}
               </NavLink>
             ))}
-          </Link>
+          </div>
         </div>
 
-        {/* Newsletter Section */}
-        <div className="col-span-1 sm:col-span-2 md:col-span-1 lg:col-span-1">
+        {/* Apps Section */}
+        <div>
           <h3 className="font-bold mb-4 text-sm sm:text-base">OUR APPS</h3>
           <div className="space-y-2">
             <a
@@ -123,8 +123,8 @@ const Footer = () => {
       </div>
 
       <div className="w-full bg-gray-600 h-[1px] mt-6 sm:mt-8"></div>
-      <div className="mt-4 sm:mt-6 text-center text-xs sm:text-sm">
-        <p className="text-black">
+      <div className="max-w-6xl mx-auto px-4 py-4">
+        <p className="text-center text-xs sm:text-sm">
           © {new Date().getFullYear()} All rights reserved.
         </p>
       </div>

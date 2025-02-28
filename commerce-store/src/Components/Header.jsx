@@ -1,194 +1,266 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Avatar from "../assets/user3.jpg";
-import {
-  Search,
-  ShoppingCart,
-  Heart,
-  MicIcon,
-  Menu,
-  X,
-  Bell,
-  User
-} from "lucide-react";
-import { useCart } from "../utils/CartContext";
-import { motion } from "framer-motion";
+import { Search, ShoppingCart, Menu, X, User, Mic, LogOut } from "lucide-react";
+import { useCart, useAuth } from "../utils/CartContext";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Header = () => {
-  const [showCheckout, setShowCheckout] = useState(false);
-  const [showConfirmation, setShowConfirmation] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { setCart, cartItems } = useCart();
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+  const { user, isAuthenticated, signOut } = useAuth();
+  const profileMenuRef = useRef(null);
+  const { cartItems } = useCart();
   const navigate = useNavigate();
 
-  const handleAdminClick = () => {
-    navigate("/user");
+  const handleUserProfileClick = () => {
+    if (isAuthenticated) {
+      setIsProfileMenuOpen(!isProfileMenuOpen);
+    } else {
+      navigate("login");
+    }
+  };
+
+  const handleSignOut = () => {
+    signOut();
+    setIsProfileMenuOpen(false);
+    navigate("/login");
   };
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  // const OrderConfirmation = () => {
-  //   return (
-  //     <Modal
-  //       open={showConfirmation}
-  //       onCancel={() => setShowConfirmation(false)}
-  //       footer={[
-  //         <Button
-  //           key="continue"
-  //           type="success"
-  //           onClick={() => {
-  //             setShowConfirmation(false);
-  //             setCart([]); //clear cart
-  //           }}
-  //         >
-  //           Continue Shopping
-  //         </Button>
-  //       ]}
-  //       centered
-  //       maskClosable={false}
-  //     >
-  //       <Result
-  //         status="success"
-  //         title="Order Confirmed!"
-  //         subTitle={
-  //           <span className="text-gray-600">
-  //             Thank you for your purchase. You will receive a confirmation
-  //             shortly
-  //           </span>
-  //         }
-  //       />
-  //     </Modal>
-  //   );
-  // };
+  // close profile menu when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        profileMenuRef.current &&
+        !profileMenuRef.current.contains(event.target)
+      ) {
+        setIsProfileMenuOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
-    <div className="w-full z-50 fixed bg-white">
+    <div className="w-full z-50 fixed bg-white shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="flex-shrink-0">
+          <motion.div
+            className="flex-shrink-0"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
+          >
             <Link
               to="/"
               className="text-emerald-700 text-xl sm:text-2xl font-bold"
             >
               Commerce
             </Link>
-          </div>
+          </motion.div>
 
           {/* Mobile Menu Toggle */}
-          <div className="md:hidden ">
-            <button
+          <div className="md:hidden">
+            <motion.button
               onClick={toggleMenu}
-              className="text-emerald-700"
+              className="text-emerald-700 p-2 rounded-md hover:bg-emerald-50 transition-colors"
               aria-label="Toggle Menu"
+              whileTap={{ scale: 0.9 }}
             >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
+            </motion.button>
           </div>
 
           {/* Search bar - Hidden on mobile, visible on md and up */}
-          <div className="hidden md:flex flex-1 justify-center mx-4">
+          <motion.div
+            className="hidden md:flex flex-1 justify-center mx-4"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.1 }}
+          >
             <div className="relative w-full max-w-md">
               <input
                 type="text"
                 placeholder="I'm shopping for...."
-                className="w-full py-2 border border-emerald-700 rounded-full pl-10 pr-10"
+                className="w-full py-2 border border-emerald-700 rounded-full pl-10 pr-10 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
               />
               <Search
                 className="absolute left-3 top-2.5 text-emerald-700"
                 size={20}
               />
-              <MicIcon
+              <Mic
                 className="absolute right-3 top-2.5 text-emerald-700 cursor-pointer"
                 size={20}
               />
             </div>
-          </div>
+          </motion.div>
 
-          {/* Icons */}
-          <div className="flex items-center space-x-4">
-            <div className="hidden md:flex items-center space-x-4">
+          {/* Desktop Navigation Icons */}
+          <motion.div
+            className="hidden md:flex items-center space-x-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
               <Link to="/checkout" className="relative cursor-pointer">
                 <ShoppingCart className="text-emerald-700" size={24} />
                 {cartItems.length > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-emerald-700 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+                  <motion.span
+                    className="absolute -top-2 -right-2 bg-emerald-700 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center"
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ type: "spring", stiffness: 500 }}
+                  >
                     {cartItems.length}
-                  </span>
+                  </motion.span>
                 )}
               </Link>
-              {/* <button className="cursor-pointer">
-                <Heart className="text-emerald-700" size={24} />
-              </button> */}
-              {/* <button className="cursor-pointer">
-                <Bell className="text-emerald-700" size={24} />
-              </button> */}
-              <button onClick={handleAdminClick} className="cursor-pointer">
-                <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
-                  <User size={20} className="text-white" />
+            </motion.div>
+
+            <div className="relative" ref={profileMenuRef}>
+              <motion.button
+                onClick={handleUserProfileClick}
+                className="cursor-pointer"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <div className="w-8 h-8 rounded-full overflow-hidden border-2 border-emerald-700">
                   <img
                     src={Avatar}
-                    alt="userImg"
-                    className="w-full rounded-full object-contain"
+                    alt="User Profile"
+                    className="w-full h-full object-cover"
                   />
                 </div>
-              </button>
+                {isAuthenticated && user && (
+                  <span className="text-sm font-medium text-gray-700 hidden sm:block">
+                    {user.name}
+                  </span>
+                )}
+              </motion.button>
+
+              {/* Profile Dropdown Menu */}
+              <AnimatePresence>
+                {isProfileMenuOpen && (
+                  <motion.div
+                    className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10"
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <div className="px-4 py-2 text-sm text-gray-700 border-b">
+                      Signed in as{" "}
+                      <span className="font-bold">{user?.email}</span>
+                    </div>
+                    <Link
+                      to="/user"
+                      className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      <User size={16} className="mr-2" />
+                      Your Profile
+                    </Link>
+                    <button
+                      onClick={handleSignOut}
+                      className="flex items-center w-full text-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      <LogOut size={16} className="mr-2" />
+                      Sign out
+                    </button>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="md:hidden mt-4 space-y-4">
-            {/* Mobile Search */}
-            <div className="relative w-full">
-              <input
-                type="text"
-                placeholder="I'm shopping for...."
-                className="w-full py-2 border border-emerald-700 rounded-full pl-10 pr-10"
-              />
-              <Search
-                className="absolute left-3 top-2.5 text-emerald-700"
-                size={20}
-              />
-              <MicIcon
-                className="absolute right-3 top-2.5 text-emerald-700 cursor-pointer"
-                size={20}
-              />
-            </div>
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div
+              className="md:hidden mt-4 pb-4 space-y-4"
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              {/* Mobile Search */}
+              <div className="relative w-full">
+                <input
+                  type="text"
+                  placeholder="I'm shopping for...."
+                  className="w-full py-2 border border-emerald-700 rounded-full pl-10 pr-10 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                />
+                <Search
+                  className="absolute left-3 top-2.5 text-emerald-700"
+                  size={20}
+                />
+                <Mic
+                  className="absolute right-3 top-2.5 text-emerald-700 cursor-pointer"
+                  size={20}
+                />
+              </div>
 
-            {/* Mobile Icons */}
-            <div className="flex justify-between items-center">
-              <Link to="/checkout" className="relative cursor-pointer">
-                <ShoppingCart className="text-emerald-700" size={24} />
-                {cartItems.length > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-emerald-700 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
-                    Cart ({cartItems.length})
-                  </span>
-                )}
-              </Link>
-              {/* <button
-                onClick={() => setShowCheckout(true)}
-                className="cursor-pointer flex items-center space-x-2"
-              >
-                <Heart className="text-emerald-700" size={24} />
-                
-              </button>
-              <button className="cursor-pointer">
-                <Bell className="text-emerald-700" size={24} />
-              </button> */}
-              <button
-                onClick={handleAdminClick}
-                className="cursor-pointer flex items-center space-x-2"
-              >
-                <User className="text-emerald-700" size={24} />
-              </button>
-            </div>
-          </div>
-        )}
+              {/* Mobile Icons */}
+              <div className="flex justify-around items-center pt-2">
+                <motion.div
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <Link
+                    to="/checkout"
+                    className="relative cursor-pointer flex flex-col items-center"
+                  >
+                    <ShoppingCart className="text-emerald-700" size={24} />
+                    <span className="text-xs mt-1">
+                      Cart {cartItems.length > 0 && `(${cartItems.length})`}
+                    </span>
+                  </Link>
+                </motion.div>
 
-        {/* <OrderConfirmation /> */}
+                <div className="flex flex-col items-center">
+                  <motion.button
+                    onClick={handleUserProfileClick}
+                    className="cursor-pointer flex flex-col items-center"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                  >
+                    <div className="w-6 h-6 rounded-full overflow-hidden border-2 border-emerald-700">
+                      <img
+                        src={Avatar}
+                        alt="User Profile"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <span className="text-xs mt-1">
+                      {isAuthenticated && user ? user.name : "Sign In"}
+                    </span>
+                  </motion.button>
+
+                  {isAuthenticated && (
+                    <motion.button
+                      onClick={handleSignOut}
+                      className="mt-2 text-xs flex items-center text-red-600"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                    >
+                      <LogOut size={12} className="mr-1" />
+                      Sign out
+                    </motion.button>
+                  )}
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );

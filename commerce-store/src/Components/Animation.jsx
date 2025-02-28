@@ -123,7 +123,6 @@ export const productCardVariants = {
     }
   },
   tap: {
-    scale: 0.98,
     transition: {
       type: "spring",
       stiffness: 400,
