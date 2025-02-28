@@ -74,7 +74,7 @@ export const newArrivals = [
   {
     id: 1,
     name: "Redmil Wireless Headset",
-    price: "29,213",
+    price: 29213,
     img: NewArrival1,
     color: "color: BK BL RB",
     category: "electronics"
@@ -82,7 +82,7 @@ export const newArrivals = [
   {
     id: 2,
     name: "Flower patterned winter jacket",
-    price: "5673",
+    price: 5673,
     img: NewArrival2,
     size: "Size: S L M XL XXL",
     category: "electronics"
@@ -90,7 +90,7 @@ export const newArrivals = [
   {
     id: 3,
     name: "Ron Lach unisex blazer",
-    price: "3563",
+    price: 3563,
     favorite: true,
     img: NewArrival3,
     size: "Size: S L M",
@@ -99,7 +99,7 @@ export const newArrivals = [
   {
     id: 4,
     name: "Victorian Luxury ladies bag",
-    price: "45, 243",
+    price: 45243,
     favorite: true,
     img: NewArrival4,
     color: "color: BK BL RB",
@@ -108,7 +108,7 @@ export const newArrivals = [
   {
     id: 5,
     name: "Adidas plain colored hoodie",
-    price: "5213",
+    price: 5213,
     img: NewArrival5,
     size: "Size: S L M XL XXL",
     category: "electronics"
@@ -116,7 +116,7 @@ export const newArrivals = [
   {
     id: 6,
     name: "Vitamin C",
-    price: "1789",
+    price: 1789,
     img: NewArrival6,
     color: "color: BK BL RB",
     category: "electronics"
@@ -128,7 +128,7 @@ export const trending = [
     id: 1,
     name: "Ornated 6ft Xmas Tree",
     description: "Almost sold out",
-    price: "13,568",
+    price: 13568,
     img: trending1,
     size: "Size: 3ft 5ft 6ft 8ft",
     category: "electronics"
@@ -137,18 +137,18 @@ export const trending = [
     id: 2,
     name: "Zeus King winter boots",
     description: "Almost sold out",
-    price: "42,675",
+    price: 42675,
     img: trending2,
     size: "Size: 40 43 45 48",
     category: "electronics"
   }
 ];
 
-export const products = [
+export const categoryProducts = [
   {
     id: 1,
     name: "Playstation 5 with pad",
-    price: "234, 464",
+    price: 234464,
     discount: "29%",
     img: ps5,
     color: "color: BK BL RB",
@@ -157,7 +157,7 @@ export const products = [
   {
     id: 2,
     name: "Dell office desktop",
-    price: "193, 572",
+    price: 193572,
     img: dell,
     color: "color: BK BL RB",
     category: "electronics"
@@ -165,7 +165,7 @@ export const products = [
   {
     id: 3,
     name: "Hp latitude 4gb rom",
-    price: "94, 631",
+    price: 94631,
     favorite: true,
     img: hp,
     color: "color: BK BL RB",
@@ -174,7 +174,7 @@ export const products = [
   {
     id: 4,
     name: "AANO portable electric fan",
-    price: "34, 000",
+    price: 34000,
     favorite: true,
     img: fan,
     color: "color: BK BL RB",
@@ -183,7 +183,7 @@ export const products = [
   {
     id: 5,
     name: "Redmill wireless headset",
-    price: "29, 213",
+    price: 29213,
     img: headset1,
     color: "color: BK BL RB",
     category: "electronics"
@@ -191,7 +191,7 @@ export const products = [
   {
     id: 6,
     name: "JBL wireless headset",
-    price: "49, 000",
+    price: 49000,
     img: headset,
     color: "color: BK BL RB",
     category: "electronics"
@@ -199,7 +199,7 @@ export const products = [
   {
     id: 7,
     name: "iphone16, 346 gb Ram",
-    price: "894, 000",
+    price: 894000,
     img: iphone,
     color: "color: BK BL RB",
     category: "electronics"
@@ -207,7 +207,7 @@ export const products = [
   {
     id: 8,
     name: "Quillox, inbuilt cooker",
-    price: "129, 513",
+    price: 129513,
     img: cooker,
     color: "color: BK BL RB",
     category: "electronics"
@@ -215,7 +215,7 @@ export const products = [
   {
     id: 9,
     name: "Binatone platinum surface",
-    price: "67, 000",
+    price: 67000,
     discount: "9%",
     img: iron,
     color: "color: BK BL RB",

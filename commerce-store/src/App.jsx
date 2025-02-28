@@ -5,7 +5,7 @@ import User from "./Components/User";
 import SignUpPage from "./Admin/SignUp";
 import Category from "./Components/Category";
 import HomePage from "./Components/HomePage";
-import CartPage from "./Components/CartPage";
+// import CartPage from "./Components/CartPage";
 import Checkout from "./Components/Checkout";
 import ProductPage from "./Components/ProductPage";
 import ProtectedRoute from "./Components/ProtectedRoute";
@@ -16,25 +16,25 @@ function App() {
     <Routes>
       <Route element={<Layout />}>
         {/* Sign Up page Route */}
-        <Route path="/" element={<Navigate to="/home" replace />} />
+        {/* <Route path="/" element={<Navigate to="/home" replace />} /> */}
 
-        <Route path="/home" element={<HomePage />} />
+        <Route path="/" element={<HomePage />} />
 
         {/* Protected route for checkout page */}
-        <Route
+        {/* <Route
           path="/checkout"
           element={
             <ProtectedRoute>
               <checkout />
             </ProtectedRoute>
           }
-        />
+        /> */}
 
         {/* other route */}
 
         <Route path="/user" element={<User />} />
         <Route path="/category" element={<Category />} />
-        <Route path="/cartpage/:productId" element={<CartPage />} />
+        {/* <Route path="/cartpage/:productId" element={<CartPage />} /> */}
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/productpage/:productId" element={<ProductPage />} />
 

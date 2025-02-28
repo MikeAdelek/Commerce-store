@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useState, useContext, useEffect } from "react";
 
 const AuthContext = createContext(null);
 const CartContext = createContext();
@@ -55,35 +55,39 @@ export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
   // const [showCart, setShowCart] = useState(false);
 
-  const addToCart = (product, trending, newArrivals) => {
+  // load cart from a local storage
+  useEffect(() => {
+    const savedCart = localStorage.getItem("cartItems");
+    if (savedCart) {
+      setCartItems(JSON.parse(savedCart));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }, [cartItems]);
+
+  const addToCart = (product) => {
     setCartItems((prevItems) => {
       // check if the item already exist in the cart
-      const existingItem = prevItems.find(
-        (item) => item.id === product.id || trending.id || newArrivals.id
-      );
+      const existingItem = prevItems.find((item) => item.id === product.id);
 
       if (existingItem) {
         // If item exists, increment quantity
         return prevItems.map((item) =>
-          item.id === product.id || trending.id || newArrivals.id
-            ? { ...item, quantity: (item.quantity || 1) + 1 }
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + 1 }
             : item
         );
       }
       // if items does not exists, add it with quantity 1
-      return [
-        ...prevItems,
-        { ...product, ...trending, ...newArrivals, quantity: 1 }
-      ];
+      return [...prevItems, { ...product, quantity: 1 }];
     });
   };
 
-  const removeFromCart = (productId, trendingId, newArrivalsId) => {
+  const removeFromCart = (productId) => {
     setCartItems((prevItems) =>
-      prevItems.filter(
-        (item) => item.id !== productId || trendingId,
-        newArrivalsId
-      )
+      prevItems.filter((item) => item.id !== productId)
     );
   };
 
@@ -108,12 +112,19 @@ export const CartProvider = ({ children }) => {
     setCartItems([]);
   };
 
+  //calculate total price
+  const total = cartItems.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
+
   const value = {
     cartItems,
     addToCart,
     removeFromCart,
     updateQuantity,
-    clearCart
+    clearCart,
+    total
   };
 
   return React.createElement(CartContext.Provider, { value }, children);

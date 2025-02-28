@@ -64,21 +64,13 @@ const Header = () => {
   // };
 
   return (
-    <div className="w-full p-3 sm:p-4 border-b">
-      <motion.div
-        initial={{ y: 30, opacity: 0 }}
-        whileInView={{
-          y: 0,
-          opacity: 1
-        }}
-        transition={{ duration: 1 }}
-        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
-      >
-        <div className="flex items-center justify-between">
+    <div className="w-full z-50 fixed bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link
-              to="/home"
+              to="/"
               className="text-emerald-700 text-xl sm:text-2xl font-bold"
             >
               Commerce
@@ -197,7 +189,7 @@ const Header = () => {
         )}
 
         {/* <OrderConfirmation /> */}
-      </motion.div>
+      </div>
     </div>
   );
 };

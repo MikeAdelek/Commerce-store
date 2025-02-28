@@ -40,36 +40,35 @@ const ImageCarousel = ({ autoSlide = true, autoSlideInterval = 5000 }) => {
                 <img
                   src={slide.image}
                   alt={`Background ${id + 1}`}
-                  className="w-full h-full object-cover opacity-20"
+                  className="w-full h-full object-cover opacity-90"
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-[#4AA58B] to-[#1C3F35]/30" />
               </div>
 
               {/* Content Layout */}
-              <div className="relative z-10 flex flex-col md:flex-row items-center justify-between p-4 md:p-8 min-h-[15rem] md:min-h-[15rem]">
+              <div className="relative z-10">
                 {/* Main Image */}
-                <div className="w-full md:w-1/2 flex items-center justify-center mb-4 md:mb-0">
-                  <img
+                <div className="w-full min-h-[20rem] md:min-h-[20rem] flex items-center justify-center">
+                  {/* content container */}
+                  <div className="w-full md:w-1/2 text-center">
+                    <h2 className="text-xl md:text-2xl font-bold text-white mb-2 md:mb-4">
+                      BLACK FRIDAY SALES !
+                    </h2>
+                    <p className="text-base md:text-lg text-white mb-4 md:mb-6">
+                      Enjoy 50% discount on every purchase of more than ₦20,000
+                    </p>
+                    <Link
+                      to="/category"
+                      className="bg-[#fe6900] hover:bg-[#fe6c00] text-white px-6 md:px-8 py-2 md:py-3 rounded-full w-max text-base md:text-lg"
+                    >
+                      Shop Now
+                    </Link>
+                  </div>
+                  {/* <img
                     src={slide.image}
                     alt={`Slide ${id + 1}`}
                     className="w-full max-w-[180px] md:max-w-[400px] h-auto object-contain rounded-md"
-                  />
-                </div>
-
-                {/* content container */}
-                <div className="w-full md:w-1/2 flex flex-col items-center md:items-start justify-center text-center md:text-left">
-                  <h2 className="text-xl md:text-2xl font-bold text-white mb-2 md:mb-4">
-                    BLACK FRIDAY SALES !
-                  </h2>
-                  <p className="text-base md:text-lg text-white mb-4 md:mb-6">
-                    Enjoy 50% discount on every purchase of more than ₦20,000
-                  </p>
-                  <Link
-                    to="/category"
-                    className="bg-[#FE6900] text-white px-6 md:px-8 py-2 md:py-3 rounded-full w-max text-base md:text-lg"
-                  >
-                    Shop Now
-                  </Link>
+                  /> */}
                 </div>
               </div>
             </div>

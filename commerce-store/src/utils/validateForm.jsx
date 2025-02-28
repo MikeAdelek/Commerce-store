@@ -7,7 +7,10 @@ export const useFormValidation = () => {
     name: "",
     address: "",
     phone: "",
-    email: ""
+    email: "",
+    city: "",
+    country: "",
+    state: ""
   });
 
   //validate checkout form
@@ -35,6 +38,21 @@ export const useFormValidation = () => {
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
     if (!emailRegex.test(checkoutForm.email)) {
       newErrors.email = "Please enter a valid email address";
+    }
+
+    // city validation
+    if (!checkoutForm.city) {
+      newErrors.city = "City is required";
+    }
+
+    // country validation
+    if (!checkoutForm.country) {
+      newErrors.country = "Country is required";
+    }
+
+    // state validation
+    if (!checkoutForm.state) {
+      newErrors.state = "State is required";
     }
 
     setErrors(newErrors);
