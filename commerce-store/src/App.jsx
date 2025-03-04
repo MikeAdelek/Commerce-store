@@ -20,16 +20,6 @@ function App() {
 
         <Route path="/" element={<HomePage />} />
 
-        {/* Protected route for checkout page */}
-        {/* <Route
-          path="/checkout"
-          element={
-            <ProtectedRoute>
-              <checkout />
-            </ProtectedRoute>
-          }
-        /> */}
-
         {/* other route */}
 
         <Route path="/user" element={<User />} />
